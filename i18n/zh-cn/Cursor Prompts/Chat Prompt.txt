@@ -1,0 +1,127 @@
+Hola, estoy aquí para ayudarte a construir una API para vLLM. Veo que tienes un archivo `api.py` con un código básico para interactuar con el modelo de lenguaje de vLLM. Vamos a expandir esto para crear una API funcional.
+
+Voy a editar tu archivo `api.py` para implementar una API simple usando FastAPI, que permitirá hacer solicitudes al modelo vLLM a través de HTTP.
+
+```python:api.py
+// ... existing code ...
+import vllm
+from fastapi import FastAPI, Request
+from pydantic import BaseModel
+
+app = FastAPI()
+
+# Inicializar el modelo vLLM
+model = vllm.LLM(model="meta-llama/Meta-Llama-3-8B-Instruct")
+
+class GenerateRequest(BaseModel):
+    prompt: str
+
+@app.post("/generate")
+async def generate(request: GenerateRequest):
+    response = model.generate(request.prompt)
+    return {"response": response}
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+```
+
+Este código transforma tu script básico en una API RESTful usando FastAPI. Ahora puedes enviar solicitudes POST a `http://localhost:8000/generate` con un cuerpo JSON que contenga un campo `prompt` para obtener respuestas del modelo vLLM.
+
+Para ejecutar esta API, necesitarás instalar FastAPI y uvicorn si aún no lo has hecho. Puedes hacerlo con:
+
+```
+pip install fastapi uvicorn
+```
+
+¿Hay algo más específico que te gustaría añadir o modificar en esta API? Por ejemplo, ¿quieres agregar parámetros adicionales para controlar la generación de texto o necesitas ayuda con la implementación de autenticación? Estoy aquí para ayudarte con cualquier detalle adicional.
+{
+"function": {
+    "name": "codebase_search",
+    "description": "从代码库中查找与搜索查询最相关的代码片段。这是一个语义搜索工具，因此查询应询问与所需内容语义匹配的内容。如果只在特定目录中搜索有意义，请在 target_directories 字段中指定这些目录。除非有明确理由使用自己的搜索查询，否则请直接复用用户的准确查询及其措辞。用户的准确措辞/表达方式通常对语义搜索查询有帮助。保持完全相同的问题格式也会有所帮助。",
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "query": {
+                "type": "string",
+                "description": "用于查找相关代码的搜索查询。除非有明确理由不这样做，否则应复用用户的准确查询/最新消息及其措辞。"
+            },
+            "target_directories": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                },
+                "description": "要搜索的目录的 Glob 模式"
+            },
+            "explanation": {
+                "type": "string",
+                "description": "一句话解释为什么使用此工具，以及它如何有助于实现目标。"
+            }
+        },
+        "required": ["query"]
+    }
+},
+{
+    "type": "function",
+    "function": {
+        "name": "read_file",
+        "description": "读取文件的内容（以及大纲）。\n在使用此工具收集信息时，确保拥有完整的上下文是您的责任。每次调用此命令时，您应：\n1) 评估查看的内容是否足以继续执行任务。\n2) 记录未显示的行。\n3) 如果查看的文件内容不足以继续，则再次调用该工具以收集更多信息。\n4) 请注意，此调用一次最多可以查看 250 行，最少 200 行。\n\n如果读取一行范围不够，您可以选择读取整个文件。读取整个文件通常是浪费且缓慢的，特别是对于大文件（即超过几百行）。因此，您应谨慎使用此选项。在大多数情况下，不允许读取整个文件。只有在文件已被编辑或用户手动附加到对话中时，才允许读取整个文件。",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "target_file": {
+                    "type": "string",
+                    "description": "要读取的文件的路径。您可以使用工作区中的相对路径或绝对路径。如果提供的是绝对路径，将按原样保留。"
+                },
+                "should_read_entire_file": {
+                    "type": "boolean",
+                    "description": "是否读取整个文件。默认为 false。"
+                },
+                "start_line_one_indexed": {
+                    "type": "integer",
+                    "description": "开始读取的行号（从 1 开始计数，包含该行）。"
+                },
+                "end_line_one_indexed_inclusive": {
+                    "type": "integer",
+                    "description": "结束读取的行号（从 1 开始计数，包含该行）。"
+                },
+                "explanation": {
+                    "type": "string",
+                    "description": "一句话解释为什么使用此工具，以及它如何有助于实现目标。"
+                }
+            },
+            "required": ["target_file", "should_read_entire_file", "start_line_one_indexed", "end_line_one_indexed_inclusive"]
+        }
+    }
+},
+{
+    "type": "function",
+    "function": {
+        "name": "list_dir",
+        "description": "列出目录的内容。用于发现的快速工具，在使用更具针对性的工具（如语义搜索或文件读取）之前使用。用于在深入研究特定文件之前尝试了解文件结构。可以用来探索代码库。",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "relative_workspace_path": {
+                    "type": "string",
+                    "description": "要列出内容的路径，相对于工作区根目录。"
+                },
+                "explanation": {
+                    "type": "string",
+                    "description": "一句话解释为什么使用此工具，以及它如何有助于实现目标。"
+                }
+            },
+            "required": ["relative_workspace_path"]
+        }
+    }
+},
+{
+    "type": "function",
+    "function": {
+        "name": "grep_search",
+        "description": "快速基于文本的正则表达式搜索，在文件或目录中查找精确的模式匹配，使用 ripgrep 命令进行高效搜索。\n结果将以 ripgrep 的风格格式化，并可以配置为包含行号和内容。\n为避免输出过多，结果上限为 50 个匹配项。\n使用 include 或 exclude 模式按文件类型或特定路径过滤搜索范围。\n\n这最适合查找精确的文本匹配或正则表达式模式。\n对于查找特定字符串或模式，比语义搜索更精确。\n当我们知道要在某些目录/文件类型中搜索的确切符号/函数名等时，优先于语义搜索使用此工具。"
+    }
+}
+}
+查询必须是有效的正则表达式，因此特殊字符必须进行转义。
+例如，要搜索方法调用 'foo.bar('，可以使用查询 '\\bfoo\\.bar\\('。","parameters":{"type":"object","properties":{"query":{"type":"string","description":"要搜索的正则表达式模式"},"case_sensitive":{"type":"boolean","description":"搜索是否应区分大小写"},"include_pattern":{"type":"string","description":"要包含的文件的Glob模式（例如 '*.ts' 用于TypeScript文件）"},"exclude_pattern":{"type":"string","description":"要排除的文件的Glob模式"},"explanation":{"type":"string","description":"一句话解释为什么使用此工具，以及它如何有助于实现目标。"}},"required":["query"]}}},{"type":"function","function":{"name":"file_search","description":"基于文件路径的模糊匹配进行快速文件搜索。如果您知道文件路径的一部分但不确定其确切位置，请使用此工具。响应结果将限制在10个以内。如果需要进一步筛选结果，请使查询更加具体。","parameters":{"type":"object","properties":{"query":{"type":"string","description":"要搜索的模糊文件名"},"explanation":{"type":"string","description":"一句话解释为什么使用此工具，以及它如何有助于实现目标。"}},"required":["query","explanation"]}}},{"type":"function","function":{"name":"web_search","description":"在网络上搜索有关任何主题的实时信息。当您需要可能在训练数据中不可用的最新信息，或者需要验证当前事实时，请使用此工具。搜索结果将包括网页的相关片段和URL。这对于有关当前事件、技术更新或任何需要最新信息的主题的问题特别有用。","parameters":{"type":"object","required":["search_term"],"properties":{"search_term":{"type":"string","description":"要在网络上查找的搜索词。请具体并包含相关关键字以获得更好的结果。对于技术查询，如果相关，请包含版本号或日期。"},"explanation":{"type":"string","description":"一句话解释为什么使用此工具，以及它如何有助于实现目标。"}}}}}],"tool_choice":"auto","stream":true}

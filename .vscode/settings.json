@@ -1,0 +1,26 @@
+{
+    "projectTranslator.currentVendor": "grok",
+    "projectTranslator.specifiedFolders": [
+        {
+            "sourceFolder": {
+                "path": ".",
+                "lang": "en-us"
+            },
+            "targetFolders": [
+                {
+                    "path": "i18n/zh-cn/",
+                    "lang": "zh-cn"
+                }
+            ]
+        }
+    ],
+    "projectTranslator.ignore": {
+        "paths": [
+            "i18n/**",
+            ".git/**",
+            ".vscode/**",
+            ".translation-cache/**",
+            "project.translation.json"
+        ]
+    }
+}

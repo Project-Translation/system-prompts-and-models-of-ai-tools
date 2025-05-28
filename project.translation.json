@@ -1,0 +1,159 @@
+{
+  "currentVendor": "grok",
+  "vendors": [
+    {
+      "name": "gemini",
+      "apiEndpoint": "https://generativelanguage.googleapis.com/v1beta",
+      "apiKeyEnvVarName": "GEMINI_API_KEY",
+      "model": "gemini-2.0-flash",
+      "rpm": 15,
+      "maxTokensPerSegment": 1000,
+      "timeout": 30,
+      "streamMode": true
+    },
+    {
+      "name": "grok",
+      "apiEndpoint": "https://api.x.ai/v1",
+      "apiKeyEnvVarName": "GROK_API_KEY",
+      "model": "grok-3",
+      "rpm": 20,
+      "maxTokensPerSegment": 2000,
+      "timeout": 30,
+      "temperature": 0,
+      "streamMode": true
+    },
+    {
+      "name": "deepseek",
+      "apiEndpoint": "https://api.deepseek.com/v1",
+      "apiKeyEnvVarName": "DEEPSEEK_API_KEY",
+      "model": "deepseek-chat",
+      "rpm": 0,
+      "maxTokensPerSegment": 4000,
+      "timeout": 30,
+      "streamMode": true
+    },
+    {
+      "name": "qwen",
+      "apiEndpoint": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+      "apiKeyEnvVarName": "QWEN_API_KEY",
+      "model": "qwq-32b",
+      "rpm": 0,
+      "maxTokensPerSegment": 4000,
+      "timeout": 30,
+      "temperature": 0,
+      "streamMode": true
+    },
+    {
+      "name": "siliconflow",
+      "apiEndpoint": "https://api.siliconflow.cn/v1",
+      "apiKeyEnvVarName": "SILICONFLOW_API_KEY",
+      "model": "Qwen/Qwen3-30B-A3B",
+      "rpm": 20,
+      "maxTokensPerSegment": 3000,
+      "timeout": 30,
+      "streamMode": true
+    }
+  ],
+  "specifiedFiles": [],
+  "specifiedFolders": [
+    {
+      "sourceFolder": {
+        "path": ".",
+        "lang": "en-us"
+      },
+      "targetFolders": [
+        {
+          "path": "i18n/zh-cn/",
+          "lang": "zh-cn"
+        }
+      ]
+    }
+  ],
+  "translationIntervalDays": 7,
+  "copyOnly": {
+    "paths": [],
+    "extensions": [
+      ".svg"
+    ]
+  },
+  "ignore": {
+    "paths": [
+      "i18n/**",
+      ".git/**",
+      ".vscode/**",
+      ".translation-cache/**",
+      "project.translation.json"
+    ],
+    "extensions": []
+  },
+  "systemPrompts": [
+    "You are a professional translator familiar with various structured documents. When translating, strictly follow the format of the structured documents. You need to prioritize the format of structured documents above all else. When in doubt, it is better not to translate than to break the document format. You need to keep the number and position of '```' unchanged. You are only allowed to output '```' if there are '```' code blocks in the input to be translated. You need to follow the expression habits of the target language and maintain the format and structure unchanged during translation. You only need to return the translated content, do not add any extra content.",
+    "When translating, ensure technical terms are accurate. Follow target language expression conventions.",
+    "The front matter of Markdown files needs to be translated, and only the values are translated.",
+    "All relative paths should change to the target path, e.g. if the source path is **./docs** and the target path is **./i18n/zh-cn**, **./docs** should be changed to **./i18n/zh-cn/docs**.",
+    "**This is the business logic part of the project translator, please do not delete this prompt**\n\n- Determine whether translation is needed. If not, return a pure string response '727d2eb8-8683-42bd-a1d0-f604fcd82163' to indicate that no translation is required."
+  ],
+  "userPrompts": [],
+  "segmentationMarkers": {
+    "markdown": [
+      "^#\\s",
+      "^##\\s",
+      "^###\\s"
+    ],
+    "html": [
+      "^<h1[^>]*>",
+      "^<h2[^>]*>",
+      "^<h3[^>]*>"
+    ],
+    "javascript": [
+      "^function\\s+\\w+\\(",
+      "^class\\s+\\w+"
+    ],
+    "typescript": [
+      "^function\\s+\\w+\\(",
+      "^class\\s+\\w+",
+      "^interface\\s+\\w+"
+    ],
+    "python": [
+      "^def\\s+\\w+\\(",
+      "^class\\s+\\w+"
+    ],
+    "java": [
+      "^public\\s+(class|interface|enum)\\s+\\w+",
+      "^\\s*public\\s+\\w+\\s+\\w+\\("
+    ],
+    "go": [
+      "^func\\s+\\w+\\(",
+      "^type\\s+\\w+\\s+struct"
+    ],
+    "c#": [
+      "^public\\s+(class|interface|enum)\\s+\\w+",
+      "^\\s*public\\s+\\w+\\s+\\w+\\("
+    ],
+    "php": [
+      "^function\\s+\\w+\\(",
+      "^class\\s+\\w+"
+    ],
+    "ruby": [
+      "^def\\s+\\w+",
+      "^class\\s+\\w+"
+    ],
+    "rust": [
+      "^fn\\s+\\w+",
+      "^struct\\s+\\w+",
+      "^enum\\s+\\w+"
+    ],
+    "swift": [
+      "^func\\s+\\w+",
+      "^class\\s+\\w+",
+      "^struct\\s+\\w+"
+    ],
+    "kotlin": [
+      "^fun\\s+\\w+",
+      "^class\\s+\\w+"
+    ],
+    "plaintext": [
+      "^\\s*$"
+    ]
+  }
+}

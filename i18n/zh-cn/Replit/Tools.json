@@ -1,0 +1,377 @@
+{
+  "tools": [
+    {
+      "name": "restart_workflow",
+      "description": "重启（或启动）一个工作流。",
+      "parameters": {
+        "properties": {
+          "name": {
+            "description": "工作流的名称。",
+            "type": "string"
+          }
+        },
+        "required": ["name"],
+        "type": "object"
+      }
+    },
+    {
+      "name": "search_filesystem",
+      "description": "此工具用于搜索并打开代码库中的相关文件。",
+      "parameters": {
+        "properties": {
+          "class_names": {
+            "default": [],
+            "description": "在代码库中搜索的特定类名列表。区分大小写，仅支持精确匹配。使用此项查找特定的类定义或其用法。",
+            "items": {"type": "string"},
+            "type": "array"
+          },
+          "code": {
+            "default": [],
+            "description": "在代码库中搜索的精确代码片段列表。用于查找特定实现或模式。每个片段应为完整的代码片段，而不仅仅是关键字。",
+            "items": {"type": "string"},
+            "type": "array"
+          },
+          "function_names": {
+            "default": [],
+            "description": "搜索的特定函数或方法名称列表。区分大小写，仅支持精确匹配。使用此项定位函数定义或其在代码中的调用。",
+            "items": {"type": "string"},
+            "type": "array"
+          },
+          "query_description": {
+            "anyOf": [{"type": "string"}, {"type": "null"}],
+            "default": null,
+            "description": "用于语义相似性搜索的自然语言查询。使用纯英文描述您要查找的内容，例如“查找数据库连接中的错误处理”或“定位身份验证中间件实现”。"
+          }
+        },
+        "type": "object"
+      }
+    },
+    {
+      "name": "packager_tool",
+      "description": "安装语言（如果需要）并安装或卸载一系列库或项目依赖项。使用此工具安装依赖项，而不是执行shell命令或手动编辑文件。使用此工具并设置language_or_system=`system`来添加系统依赖项，而不是使用`apt install`。首次安装库时，还会自动创建必要的项目文件（如'package.json'、'cargo.toml'等）。这将自动重启所有工作流。",
+      "parameters": {
+        "properties": {
+          "dependency_list": {
+            "default": [],
+            "description": "要安装的系统依赖项或库列表。系统依赖项是Nixpkgs包集合中的包（属性路径）。示例系统依赖项：['jq', 'ffmpeg', 'imagemagick']。库是特定编程语言的包。示例库：['express'], ['lodash']。",
+            "items": {"type": "string"},
+            "type": "array"
+          },
+          "install_or_uninstall": {
+            "description": "选择安装还是卸载。",
+            "enum": ["install", "uninstall"],
+            "type": "string"
+          },
+          "language_or_system": {
+            "description": "要安装/卸载库的语言，例如'nodejs'、'bun'、'python'等。使用`system`来安装/卸载系统依赖项。",
+            "type": "string"
+          }
+        },
+        "required": ["install_or_uninstall", "language_or_system"],
+        "type": "object"
+      }
+    },
+    {
+      "name": "programming_language_install_tool",
+      "description": "如果程序无法运行，可能是因为未安装编程语言。使用programming_language_install_tool来安装它。如果需要使用Python，请在programming_languages中包含'python-3.11'。对于Python 3.10，使用'python-3.10'。如果需要使用Node.js，请在programming_languages中包含'nodejs-20'。对于Node.js 18，使用'nodejs-18'。注意，这也将安装语言的包管理器，因此无需单独安装。",
+      "parameters": {
+        "properties": {
+          "programming_languages": {
+            "description": "要安装的编程语言的ID。",
+            "items": {"type": "string"},
+            "type": "array"
+          }
+        },
+        "required": ["programming_languages"],
+        "type": "object"
+      }
+    },
+    {
+      "name": "create_postgresql_database_tool",
+      "description": "当项目需要PostgreSQL数据库时，您可以使用此工具为其创建数据库。成功创建数据库后，您将可以访问以下环境变量：DATABASE_URL, PGPORT, PGUSER, PGPASSWORD, PGDATABASE, PGHOST\n您可以在项目中使用这些环境变量连接到数据库。",
+      "parameters": {
+        "properties": {},
+        "type": "object"
+      }
+    },
+    {
+      "name": "check_database_status",
+      "description": "检查给定数据库是否可用和可访问。\n此工具用于验证指定数据库的连接和状态。",
+      "parameters": {
+        "properties": {},
+        "type": "object"
+      }
+    },
+    {
+      "name": "str_replace_editor",
+```
+"description": "自定义编辑工具，用于查看、创建和编辑文件\n* 状态在命令调用和与用户的讨论中是持久的\n* 如果`path`是一个文件，`view`会显示应用`cat -n`的结果。如果`path`是一个目录，`view`会列出非隐藏文件和目录，最多深入2层\n* 如果指定的`path`已作为文件存在，则无法使用`create`命令\n* 如果一个`command`生成了长输出，将会被截断并标记为`<response clipped>`\n* `undo_edit`命令将撤销对`path`处文件的最后一次编辑\n\n使用`str_replace`命令的注意事项：\n* `old_str`参数应完全匹配原始文件中的一个或多个连续行。请注意空格！\n* 如果`old_str`参数在文件中不是唯一的，则不会执行替换。确保在`old_str`中包含足够的上下文以使其唯一\n* `new_str`参数应包含应替换`old_str`的编辑后的行",
+      "parameters": {
+        "properties": {
+          "command": {
+            "description": "要运行的命令。允许的选项有：`view`、`create`、`str_replace`、`insert`、`undo_edit`。",
+            "enum": ["view", "create", "str_replace", "insert", "undo_edit"],
+            "type": "string"
+          },
+          "file_text": {
+            "description": "创建命令`create`的必需参数，包含要创建的文件内容。",
+            "type": "string"
+          },
+          "insert_line": {
+            "description": "插入命令`insert`的必需参数。`new_str`将插入到`path`的`insert_line`行之后。",
+            "type": "integer"
+          },
+          "new_str": {
+            "description": "替换命令`str_replace`的可选参数，包含新字符串（如果未提供，则不添加字符串）。插入命令`insert`的必需参数，包含要插入的字符串。",
+            "type": "string"
+          },
+          "old_str": {
+            "description": "替换命令`str_replace`的必需参数，包含`path`中要替换的字符串。",
+            "type": "string"
+          },
+          "path": {
+            "description": "文件或目录的绝对路径，例如`/repo/file.py`或`/repo`。",
+            "type": "string"
+          },
+          "view_range": {
+            "description": "当`path`指向文件时，`view`命令的可选参数。如果未提供，则显示完整文件。如果提供，则文件将显示在指定的行号范围内，例如[11, 12]将显示第11和12行。从1开始索引。设置`[start_line, -1]`将显示从`start_line`到文件末尾的所有行。",
+            "items": {"type": "integer"},
+            "type": "array"
+          }
+        },
+        "required": ["command", "path"],
+        "type": "object"
+      }
+    },
+    {
+      "name": "bash",
+      "description": "在bash shell中运行命令\n* 调用此工具时，\"command\"参数的内容不需要进行XML转义。\n* 您可以通过apt和pip访问常见的Linux和Python包的镜像。\n* 状态在命令调用和与用户的讨论中是持久的。\n* 要检查文件的特定行范围，例如第10-25行，请尝试'sed -n 10,25p /path/to/the/file'。\n* 请避免使用可能产生大量输出的命令。\n* 请在后台运行长时间运行的命令，例如'sleep 10 &'或在后台启动服务器。",
+      "parameters": {
+        "properties": {
+          "command": {
+            "description": "要运行的bash命令。除非工具正在重启，否则此项为必需。",
+            "type": "string"
+          },
+          "restart": {
+            "description": "指定为true将重启此工具。否则，请勿指定此项。",
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      }
+    },
+    {
+      "name": "workflows_set_run_config_tool",
+      "description": "配置一个执行shell命令的后台任务。\n这对于启动开发服务器、构建过程或项目所需的任何其他长时间运行的任务非常有用。\n如果这是一个服务器，请确保在`wait_for_port`字段中指定它监听的端口号，这样\n在服务器准备好接受连接之前，工作流程不会被视为已启动。\n\n示例：\n- 对于Node.js服务器：设置`name`为'Server'，`command`为'npm run dev'，`wait_for_port`为5000\n- 对于Python脚本：设置名称为'Data Processing'，命令为'python process_data.py'\n\n可以配置多个任务，它们将在项目启动时并行执行。\n配置任务后，它将自动在后台开始执行。\n\n始终在端口5000上提供服务，即使该端口有问题：这是唯一未被防火墙阻止的端口。\n",
+      "parameters": {
+        "properties": {
+          "command": {
+            "description": "要执行的shell命令。这将在项目启动时在后台运行。",
+            "type": "string"
+          },
+          "name": {
+            "description": "用于标识命令的唯一名称。这将用于跟踪命令。",
+            "type": "string"
+          },
+          "wait_for_port": {
+            "anyOf": [{"type": "integer"}, {"type": "null"}],
+            "default": null,
+            "description": "如果命令启动了一个监听端口的进程，请在此处指定端口号。\n这允许系统在认为命令完全启动之前等待端口准备就绪。"
+          }
+        },
+        "required": ["name", "command"],
+        "type": "object"
+      }
+    },
+    {
+      "name": "workflows_remove_run_config_tool",
+      "description": "删除之前添加的命名命令",
+      "parameters": {
+        "properties": {
+          "name": {
+"description": "要删除的命令名称。",
+            "type": "string"
+          }
+        },
+        "required": ["name"],
+        "type": "object"
+      }
+    },
+    {
+      "name": "execute_sql_tool",
+      "description": "此工具允许您执行SQL查询，修复数据库错误并访问数据库模式。\n\n## 使用规则：\n1. 始终优先使用此工具修复数据库错误，而不是通过编写代码（如db.drop_table(table_name)）来修复\n2. 提供清晰、格式良好的SQL查询，确保语法正确\n3. 专注于数据库交互、数据操作和查询优化\n\n## 适用场景：\n1. 修复和排查数据库相关问题\n2. 探索数据库模式和关系\n3. 更新或修改数据库中的数据\n4. 运行一次性临时SQL代码\n\n## 不适用场景：\n1. 非SQL数据库操作（NoSQL、基于文件的数据库）\n2. 数据库迁移，应使用类似Drizzle或flask-migrate的迁移工具\n\n## 使用示例：\n\n### 示例1：查看数据库信息\nsql_query: SELECT * FROM customers WHERE region = 'North';\n\n### 示例2：运行临时SQL查询\nsql_query:  EXPLAIN ANALYZE SELECT orders.*, customers.name\n            FROM orders\n            JOIN customers ON orders.customer_id = customers.id;\n\n### 示例3：向数据库插入数据\nsql_query:  INSERT INTO products (name, price, category)\n            VALUES ('New Product', 29.99, 'Electronics');",
+      "parameters": {
+        "properties": {
+          "sql_query": {
+            "description": "要执行的SQL查询",
+            "type": "string"
+          }
+        },
+        "required": ["sql_query"],
+        "type": "object"
+      }
+    },
+    {
+      "name": "suggest_deploy",
+      "description": "当您认为项目已准备好部署时，调用此函数。\n这将向用户建议他们可以部署项目。\n这是一个终止操作 - 一旦调用，您的任务即完成，\n不应再采取任何进一步行动来验证部署。\n部署过程将由Replit Deployments自动处理。\n\n## 使用规则：\n1. 在验证项目按预期工作后使用此工具。\n2. 部署过程将由Replit Deployments自动处理。\n\n## 适用场景：\n1. 当项目准备好部署时。\n2. 当用户请求部署项目时。\n\n## 更多信息：\n- 用户需要手动启动部署。\n- Replit Deployments将处理应用程序构建、托管、TLS、健康检查。\n- 调用此工具后，无需执行任何后续步骤或验证。\n- 部署后，应用程序将在`.replit.app`域名下可用，\n  或在配置了自定义域名的情况下使用自定义域名。",
+      "parameters": {
+        "description": "空参数类，因为建议部署不需要任何参数。",
+        "properties": {},
+        "type": "object"
+      }
+    },
+    {
+      "name": "report_progress",
+      "description": "当用户明确确认某项主要功能或任务已完成时，调用此函数。\n未经用户确认不得调用。\n在'summary'字段中提供所完成内容的简洁总结。\n此工具将询问用户下一步做什么。使用此工具后不要做任何其他操作。",
+      "parameters": {
+        "properties": {
+          "summary": {
+            "description": "以最多5项总结您最近的更改。尽量简洁，不超过30个字，分成多行。\n在最近完成的每项前加\u2713，正在进行的项目前加\u2192，简短扼要，不超过50个字。不使用表情符号。\n使用与用户语言匹配的简单日常语言。避免技术术语，因为用户非技术背景。\n最后询问用户下一步做什么。",
+            "type": "string"
+          }
+        },
+        "required": ["summary"],
+        "type": "object"
+      }
+    },
+    {
+      "name": "web_application_feedback_tool",
+      "description": "此工具捕获屏幕截图并检查日志，以验证Web应用程序是否在Replit工作流程中运行。\n\n如果应用程序正在运行，该工具将显示应用程序，向用户提出问题，并等待用户响应。\n当应用程序处于良好状态且请求的任务完成时使用此工具，以避免不必要的延迟。",
+      "parameters": {
+        "properties": {
+          "query": {
+            "description": "您将向用户提出的问题。\n\n使用与用户语言匹配的简单日常语言。避免技术术语，因为用户非技术背景。\n以最多5项总结您最近的更改。尽量简洁，不超过30个字，分成多行。\n在最近完成的每项前加\u2713，正在进行的项目前加\u2192，简短扼要，不超过50个字。不使用表情符号。\n每次仅限提出一个问题。\n您可以访问工作流程状态、控制台日志和屏幕截图——请自行获取，而不是询问用户。\n询问用户对下一步的输入或确认。不要请求详细信息。",
+            "type": "string"
+          },
+          "website_route": {
+            "anyOf": [{"type": "string"}, {"type": "null"}],
+            "default": null,
+            "description": "您询问的网站特定路由或路径，如果与根URL('/')不同。包含前导斜杠。例如：'/dashboard'或'/products/list'"
+          },
+          "workflow_name": {
+            "description": "运行服务器的工作流程名称。用于确定网站的端口。",
+            "type": "string"
+          }
+        },
+        "required": ["query", "workflow_name"],
+        "type": "object"
+      }
+    },
+    {
+      "name": "shell_command_application_feedback_tool",
+"description": "此工具允许您执行交互式 shell 命令，并就 CLI 应用程序或交互式 Python 程序的输出或行为提出问题。\n\n## 使用规则：\n1. 提供清晰、简洁的交互式命令以执行，并就结果或交互提出具体问题。\n2. 每次只询问一个关于交互行为或输出的问题。\n3. 专注于交互功能、用户输入/输出和实时行为。\n4. 指定要运行的确切命令，包括启动交互会话所需的任何参数或标志。\n5. 在询问有关 Python 程序的问题时，包括文件名和启动交互模式所需的任何命令行参数。\n\n## 适用场景：\n1. 测试和验证需要用户输入和实时交互的交互式 CLI 应用程序或 Python 程序的功能。\n2. 检查程序在交互式 shell 环境中是否正确响应用户输入。\n\n## 不适用场景：\n1. 对于不需要用户输入的非交互式命令或脚本。\n2. 对于 API 测试或基于 Web 的交互。\n3. 对于打开本地桌面 VNC 窗口的 shell 命令。\n\n## 使用示例：\n命令：python interactive_script.py\n问题：当提示输入时，您能否输入您的名字并收到个性化的问候？\n\n命令：./text_adventure_game\n问题：您能否做出影响故事进展的选择？\n\n命令：python -i data_analysis.py\n问题：您能否交互式查询和操作加载的数据集？",
+      "parameters": {
+        "properties": {
+          "query": {
+            "description": "关于 shell 应用程序的问题或反馈请求",
+            "type": "string"
+          },
+          "shell_command": {
+            "description": "在请求反馈之前要执行的 shell 命令",
+            "type": "string"
+          },
+          "workflow_name": {
+            "description": "此命令的工作流名称，必须是现有工作流。",
+            "type": "string"
+          }
+        },
+        "required": ["query", "shell_command", "workflow_name"],
+        "type": "object"
+      }
+    },
+    {
+      "name": "vnc_window_application_feedback",
+      "description": "此工具允许您执行交互式桌面应用程序，该应用程序将通过 VNC 访问并显示给用户。\n您可以就该应用程序的输出或行为提出问题。\n\n## 使用规则：\n1. 提供清晰、简洁的命令以执行应用程序，并就结果或交互提出具体问题。\n2. 每次只询问一个关于交互行为或输出的问题。\n3. 专注于交互功能、用户输入/输出和实时行为。\n4. 指定要运行的确切命令，包括任何必要的参数或标志。\n\n## 适用场景：\n1. 测试和验证需要用户输入和实时交互的交互式桌面程序的功能。\n2. 检查程序在附加的 VNC 窗口中是否正确响应用户输入。\n\n## 不适用场景：\n1. 对于不需要用户输入的非交互式命令或脚本。\n2. 对于 API 测试或基于 Web 的交互。\n3. 对于不打开本地桌面 VNC 窗口的 shell 命令。\n\n## 使用示例：\n命令：python pygame_snake.py\n问题：键盘事件是否会改变屏幕上蛇的方向？\n\n命令：./opencv_face_detection\n问题：您是否看到一张带有绿色矩形框住检测到的人脸的照片？",
+      "parameters": {
+        "properties": {
+          "query": {
+            "description": "关于通过 VNC 可见的本地窗口应用程序的问题或反馈请求",
+            "type": "string"
+          },
+          "vnc_execution_command": {
+            "description": "在请求反馈之前要执行的 VNC shell 命令；此 shell 命令应启动桌面窗口",
+            "type": "string"
+          },
+          "workflow_name": {
+            "description": "此 VNC shell 命令的工作流名称，必须是现有工作流。",
+            "type": "string"
+          }
+        },
+        "required": ["query", "vnc_execution_command", "workflow_name"],
+        "type": "object"
+      }
+    },
+    {
+      "name": "ask_secrets",
+      "description": "向用户询问项目所需的秘密 API 密钥。\n如果缺少某个密钥，请尽快使用此工具。\n这些密钥将被添加到环境变量中。\n运行此工具的成本非常高。\n\n好的示例：\n- 为了通过 Stripe 设置安全支付，我们需要 STRIPE_SECRET_KEY。\n  此密钥将用于安全处理支付并管理您应用程序中的订阅。\n- 为了启用 SMS 价格提醒，我们需要 Twilio API 凭据 TWILIO_ACCOUNT_SID、\n  TWILIO_AUTH_TOKEN 和 TWILIO_PHONE_NUMBER。这些将用于在达到价格目标时发送 SMS 通知。\n- 为了使用 OpenAI 模型构建应用程序，我们需要 OPENAI_API_KEY。\n\n不好的示例（请勿使用）：\n- PHONE_NUMBER、EMAIL_ADDRESS 或 PASSWORD\n    对于此类变量，您应通过 user_response 工具直接询问用户。\n- REPLIT_DOMAINS 或 REPL_ID\n    这些密钥始终存在，因此您永远不需要询问它们。\n",
+      "parameters": {
+        "properties": {
+          "secret_keys": {
+            "description": "项目所需的秘密密钥标识符数组（例如 [\"OPENAI_API_KEY\", \"GITHUB_TOKEN\"]）",
+            "items": {"type": "string"},
+            "type": "array"
+          },
+          "user_message": {
+            "description": "发送给用户的消息，解释需要这些秘密密钥的原因。如果您还没有这样做，请以通俗的语言简要介绍什么是秘密密钥，假设用户从未注册过 API 密钥。请以尊重的语气提出您的问题。",
+            "type": "string"
+          }
+        },
+        "required": ["secret_keys", "user_message"],
+        "type": "object"
+      }
+    },
+    {
+      "name": "check_secrets",
+      "description": "检查环境中是否存在给定的密钥。\n此工具用于验证密钥的存在，而不暴露其实际值。\n",
+"parameters": {
+        "properties": {
+          "secret_keys": {
+            "description": "环境中需要检查的密钥。",
+            "items": {"type": "string"},
+            "type": "array"
+          }
+        },
+        "required": ["secret_keys"],
+        "type": "object"
+      }
+    }
+  ],
+  "internal_tags": [
+    {
+      "name": "View",
+      "description": "包含文件系统信息和仓库详情"
+    },
+    {
+      "name": "policy_spec",
+      "description": "包含通信、主动性和数据完整性策略"
+    },
+    {
+      "name": "file_system",
+      "description": "显示目录结构"
+    },
+    {
+      "name": "repo_overview",
+      "description": "包含代码摘要"
+    },
+    {
+      "name": "important",
+      "description": "包含关键策略提醒"
+    },
+    {
+      "name": "workflow_console_logs",
+      "description": "包含运行工作流的日志"
+    },
+    {
+      "name": "automatic_updates",
+      "description": "包含系统生成的更新"
+    },
+    {
+      "name": "webview_console_logs",
+      "description": "包含用户浏览器中的日志"
+    },
+    {
+      "name": "function_results",
+      "description": "包含函数/工具调用的结果"
+    }
+  ]
+}
