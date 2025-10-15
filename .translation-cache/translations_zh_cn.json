@@ -1,28 +1,23 @@
 {
   "Cursor Prompts/Agent Prompt.txt": {
-    "translate_datetime": "2025-05-28:18:21",
-    "src_hash": "1678ead2dbaa6ff39423ff63c1f56920",
-    "src_commit_id": "2fe64c54c132e3a7ce676abe12b2ec4a10b20eac"
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "1678ead2dbaa6ff39423ff63c1f56920"
   },
   "Cursor Prompts/Chat Prompt.txt": {
-    "translate_datetime": "2025-05-28:18:21",
-    "src_hash": "3b7f93c1aa21dd77635a9126086edc69",
-    "src_commit_id": "2fe64c54c132e3a7ce676abe12b2ec4a10b20eac"
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "3b7f93c1aa21dd77635a9126086edc69"
   },
   "Devin AI/Prompt.txt": {
-    "translate_datetime": "2025-05-28:18:25",
-    "src_hash": "51be6129deac3efcf5eaac7d57b2fe01",
-    "src_commit_id": "2fe64c54c132e3a7ce676abe12b2ec4a10b20eac"
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "51be6129deac3efcf5eaac7d57b2fe01"
   },
   "dia/Prompt.txt": {
-    "translate_datetime": "2025-05-28:18:26",
-    "src_hash": "6c1ff465676a7791c67446e5985b10e5",
-    "src_commit_id": "2fe64c54c132e3a7ce676abe12b2ec4a10b20eac"
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "6c1ff465676a7791c67446e5985b10e5"
   },
   "LICENSE.md": {
-    "translate_datetime": "2025-05-28:18:28",
-    "src_hash": "1ebbd3e34237af26da5dc08a4e440464",
-    "src_commit_id": "2fe64c54c132e3a7ce676abe12b2ec4a10b20eac"
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "1ebbd3e34237af26da5dc08a4e440464"
   },
   "Lovable/Prompt.txt": {
     "translate_datetime": "2025-05-28:18:34",
@@ -30,69 +25,56 @@
     "src_commit_id": "2fe64c54c132e3a7ce676abe12b2ec4a10b20eac"
   },
   "Manus Agent Tools & Prompt/Agent loop.txt": {
-    "translate_datetime": "2025-05-28:18:34",
-    "src_hash": "0a22a46a1ed2d97857d86d1d55e4d170",
-    "src_commit_id": "2fe64c54c132e3a7ce676abe12b2ec4a10b20eac"
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "0a22a46a1ed2d97857d86d1d55e4d170"
   },
   "Manus Agent Tools & Prompt/Modules.txt": {
-    "translate_datetime": "2025-05-28:18:35",
-    "src_hash": "8b8bf609b0fd9f949fcb396c0ca4cc10",
-    "src_commit_id": "2fe64c54c132e3a7ce676abe12b2ec4a10b20eac"
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "8b8bf609b0fd9f949fcb396c0ca4cc10"
   },
   "Manus Agent Tools & Prompt/Prompt.txt": {
-    "translate_datetime": "2025-05-28:18:35",
-    "src_hash": "ce0729e5513d3b1cb5742a9bdf8a762d",
-    "src_commit_id": "2fe64c54c132e3a7ce676abe12b2ec4a10b20eac"
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "ce0729e5513d3b1cb5742a9bdf8a762d"
   },
   "Manus Agent Tools & Prompt/tools.json": {
-    "translate_datetime": "2025-05-28:18:36",
-    "src_hash": "53b00dcc1f7eb3d3ce1ddb2aaac2d423",
-    "src_commit_id": "2fe64c54c132e3a7ce676abe12b2ec4a10b20eac"
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "53b00dcc1f7eb3d3ce1ddb2aaac2d423"
   },
   "Open Source prompts/Bolt/Prompt.txt": {
-    "translate_datetime": "2025-05-28:18:37",
-    "src_hash": "07c4d42b563114e1cc04e1496c95aa66",
-    "src_commit_id": "2fe64c54c132e3a7ce676abe12b2ec4a10b20eac"
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "07c4d42b563114e1cc04e1496c95aa66"
   },
   "Open Source prompts/Cline/Prompt.txt": {
-    "translate_datetime": "2025-05-28:18:40",
-    "src_hash": "04e73f6585e91407f717d59a3b68176d",
-    "src_commit_id": "2fe64c54c132e3a7ce676abe12b2ec4a10b20eac"
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "04e73f6585e91407f717d59a3b68176d"
   },
   "Open Source prompts/Codex CLI/Prompt.txt": {
-    "translate_datetime": "2025-05-28:18:40",
-    "src_hash": "07881e58ab5d33f7195a86d113378588",
-    "src_commit_id": "2fe64c54c132e3a7ce676abe12b2ec4a10b20eac"
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "07881e58ab5d33f7195a86d113378588"
   },
   "Open Source prompts/RooCode/Prompt.txt": {
-    "translate_datetime": "2025-05-28:18:43",
-    "src_hash": "8bc7377542e81cb5da5cb6afab03d561",
-    "src_commit_id": "2fe64c54c132e3a7ce676abe12b2ec4a10b20eac"
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "8bc7377542e81cb5da5cb6afab03d561"
   },
   "README.md": {
-    "translate_datetime": "2025-05-28:18:43",
-    "src_hash": "cd7bf05ec8701b971039c146dd8c5eb8",
-    "src_commit_id": "2fe64c54c132e3a7ce676abe12b2ec4a10b20eac"
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "490ef7728044d1bd2c2ca939feb734a0"
   },
   "Replit/Prompt.txt": {
-    "translate_datetime": "2025-05-28:18:43",
-    "src_hash": "a75ccfdf1a46507dae8a1fb9b7922808",
-    "src_commit_id": "2fe64c54c132e3a7ce676abe12b2ec4a10b20eac"
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "9c768c621d69fd669b6ba9b75aa26558"
   },
   "Replit/Tools.json": {
-    "translate_datetime": "2025-05-28:18:45",
-    "src_hash": "df85a4465668f83fd0cb46088912e1e3",
-    "src_commit_id": "2fe64c54c132e3a7ce676abe12b2ec4a10b20eac"
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "df85a4465668f83fd0cb46088912e1e3"
   },
   "Same.dev/Prompt.txt": {
-    "translate_datetime": "2025-05-28:18:46",
-    "src_hash": "374d5a193bd99d2cd50e0ad9041cfbf9",
-    "src_commit_id": "2fe64c54c132e3a7ce676abe12b2ec4a10b20eac"
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "35039f0ac38e62a67da734c9a85500a1"
   },
   "Trae/Chat Prompt.txt": {
-    "translate_datetime": "2025-05-28:18:47",
-    "src_hash": "aa82b36bb262e3a06717204729a8ecb8",
-    "src_commit_id": "2fe64c54c132e3a7ce676abe12b2ec4a10b20eac"
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "aa82b36bb262e3a06717204729a8ecb8"
   },
   "v0 Prompts and Tools/Model.md": {
     "translate_datetime": "2025-05-28:18:47",
@@ -100,14 +82,12 @@
     "src_commit_id": "2fe64c54c132e3a7ce676abe12b2ec4a10b20eac"
   },
   "v0 Prompts and Tools/Prompt.txt": {
-    "translate_datetime": "2025-05-28:18:48",
-    "src_hash": "63c290c204898643c7c81de82a24757c",
-    "src_commit_id": "2fe64c54c132e3a7ce676abe12b2ec4a10b20eac"
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "f04a4a74cf3af4fa5a3bf19f10008481"
   },
   "VSCode Agent/Prompt.txt": {
-    "translate_datetime": "2025-05-28:18:49",
-    "src_hash": "cf4988430f3d4ecc04fbc4545d16d05a",
-    "src_commit_id": "2fe64c54c132e3a7ce676abe12b2ec4a10b20eac"
+    "translate_datetime": "2025-10-14:18:09",
+    "src_hash": "cf4988430f3d4ecc04fbc4545d16d05a"
   },
   "Windsurf/Prompt.txt": {
     "translate_datetime": "2025-05-28:18:51",
@@ -118,5 +98,321 @@
     "translate_datetime": "2025-05-28:18:53",
     "src_hash": "0309c4dce6e8d0351b03267791c1055c",
     "src_commit_id": "2fe64c54c132e3a7ce676abe12b2ec4a10b20eac"
+  },
+  ".github/FUNDING.yml": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "d8bcdc63aa5bd190f7ca49c270d7b7ac"
+  },
+  "Amp/claude-4-sonnet.yaml": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "9b3bddcd6af86f8baca6704b3a984f86"
+  },
+  "Amp/gpt-5.yaml": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "b8758bc1fd7e09343163a4e47f0acb22"
+  },
+  "Amp/README.md": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "cdb7d534181fd602491628c801bcb0de"
+  },
+  "Amp/view-thread-yaml.png": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "9f45fade4355627debcd36a5110615f8"
+  },
+  "Anthropic/Claude Code 2.0.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "48b95aa004cae2169f8768008884632e"
+  },
+  "Anthropic/Sonnet 4.5 Prompt.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "33afee2dfdbbeb961ec04162bd9872b1"
+  },
+  "assets/Latitude_logo.png": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "8356988a78ad614c4f031010076c1692"
+  },
+  "Augment Code/claude-4-sonnet-agent-prompts.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "1ef7a4d1b595b12db98e6112c06b2ee5"
+  },
+  "Augment Code/claude-4-sonnet-tools.json": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "c3f53a7fe742e8304dc859aeedc6950a"
+  },
+  "Augment Code/gpt-5-agent-prompts.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "6b8edc1b45803bbaea783ee586215af7"
+  },
+  "Augment Code/gpt-5-tools.json": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "3980168d208cad44a72f7b09b91c610f"
+  },
+  "Claude Code/claude-code-system-prompt.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "fcee7af3872bc37e920bf1009164e4bd"
+  },
+  "Claude Code/claude-code-tools.json": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "90ab5c06680a53919c412dad49e4a968"
+  },
+  "Cluely/Default Prompt.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "d561f007603de5ebde93aaaeab1821ce"
+  },
+  "Cluely/Enterprise Prompt.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "33ade1654f77a69ab9c4ba51341aade0"
+  },
+  "CodeBuddy Prompts/Chat Prompt.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "a5a28cbdcac3e4bad83e9b7f2f06952b"
+  },
+  "Comet Assistant/System Prompt.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "a4ab4ab99aa49c9ed14f06ab99ea0f09"
+  },
+  "Cursor Prompts/Agent CLI Prompt 2025-08-07.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "7c763d4410f8e4b4842b52204133e8ef"
+  },
+  "Cursor Prompts/Agent Prompt 2025-09-03.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "61eb5d92bb10cccb5221fac86e83b424"
+  },
+  "Cursor Prompts/Agent Prompt v1.0.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "d77736ff627827a4d770dc9b1e2e0bf2"
+  },
+  "Cursor Prompts/Agent Tools v1.0.json": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "8c411131ae9bd3bbe9adcf409022fb29"
+  },
+  "Cursor Prompts/Memory Prompt.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "1679de40c34eeace641df7f2de172aff"
+  },
+  "Cursor Prompts/Memory Rating Prompt.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "1467429b702e7fc170f804ee82be1d16"
+  },
+  "Junie/Prompt.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "90007711164cfd5ef8a708faf3062080"
+  },
+  "Kiro/Mode_Clasifier_Prompt.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "70080dcf473c7d2cc27b293f339c34e9"
+  },
+  "Kiro/Spec_Prompt.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "8d181e31b4e9bb6b392153e086ae548a"
+  },
+  "Kiro/Vibe_Prompt.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "c7cc2a8efc94d452adb9d7269d6078ac"
+  },
+  "Leap.new/Prompts.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "a42baaf48c77c27d0985139ce55966a1"
+  },
+  "Leap.new/tools.json": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "db81b40fb42192db618560f3d9088fe1"
+  },
+  "Lovable/Agent Prompt.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "198572a7c9dabcef9902b7cc5fc3ebcc"
+  },
+  "Lovable/Agent Tools.json": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "03020c049e9ae431cc43adb9b5b7bc6f"
+  },
+  "NotionAi/Prompt.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "1c8eedb8f2a8759c5d59e25b28ff8fc8"
+  },
+  "NotionAi/tools.json": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "e696e267522c0ed245f79e8c6ef380dc"
+  },
+  "Open Source prompts/Codex CLI/openai-codex-cli-system-prompt-20250820.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "350068b73fff4271112fff498223ee76"
+  },
+  "Open Source prompts/Gemini CLI/google-gemini-cli-system-prompt.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "1758cffae3610b8286637ff9d39d3ffa"
+  },
+  "Open Source prompts/Lumo/Prompt.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "e422cb054529dec75458da6db5f06af0"
+  },
+  "Orchids.app/Decision-making prompt.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "4b3049dfb80564462b2eb0b052ee66b9"
+  },
+  "Orchids.app/System Prompt.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "bca12637e317185cf882b6c68a02169a"
+  },
+  "Perplexity/Prompt.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "e18e8aad71f2080018eb5e2eab757023"
+  },
+  "Poke/Poke agent.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "d87dafe4d436aadd5658d7d981a82934"
+  },
+  "Poke/Poke_p1.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "cbd01b992ff5166e2957c2f5c06f756d"
+  },
+  "Poke/Poke_p2.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "393ca4be6a7a050bddb72749f97133e9"
+  },
+  "Poke/Poke_p3.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "341dbdcb7aa622fd89de27d4e31f3f37"
+  },
+  "Poke/Poke_p4.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "f99f33e68f0223197a0b3dc5357a810b"
+  },
+  "Poke/Poke_p5.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "d1b408aba3f2517b2bbf11b25e1d3ec5"
+  },
+  "Poke/Poke_p6.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "a5b60d554a5ad3d67f922ab7bff56d25"
+  },
+  "Qoder/prompt.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "377a084d922a90fd4442c3b36f36975b"
+  },
+  "Qoder/Quest Action.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "54f79e82c6458081554b7fa40921b3e2"
+  },
+  "Same.dev/Tools.json": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "844692eaddbef9571f80a17aa27d313b"
+  },
+  "Trae/Builder Prompt.txt": {
+    "translate_datetime": "2025-10-15:15:29",
+    "src_hash": "0c2bbd184728c4f71100305f7eb4b388"
+  },
+  "Trae/Builder Tools.json": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "43dcbdb9c50bd3d65a1a96ac8468ee96"
+  },
+  "Traycer AI/phase_mode_prompts.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "c4e7e41d70f64b191fbfd1b49c822fbc"
+  },
+  "Traycer AI/phase_mode_tools.json": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "97d528333c7b875ec1863b1ef466faa9"
+  },
+  "Traycer AI/plan_mode_prompts": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "6a2f6191eea17677000941d900edb361"
+  },
+  "Traycer AI/plan_mode_tools.json": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "3cb530a2baccb06fb741c116b28b5865"
+  },
+  "CodeBuddy Prompts/Craft Prompt.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "80083cdc2a2bd4dfacd8dc7e8dc73ecb"
+  },
+  "Cursor Prompts/Agent Prompt v1.2.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "8ca3fc29e93a86f8d6159ce35dd606e3"
+  },
+  "Qoder/Quest Design.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "80ebfe91e7b6b4aeccc9e65b3b3802e7"
+  },
+  "v0 Prompts and Tools/Tools.json": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "5cd6a5b1ab1818a35114d10f1696ee73"
+  },
+  "VSCode Agent/chat-titles.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "d8fd475f89b1e25e251c58344fadf97b"
+  },
+  "VSCode Agent/claude-sonnet-4.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "358df4a3cbfb305282328ab8ee598967"
+  },
+  "VSCode Agent/gemini-2.5-pro.txt": {
+    "translate_datetime": "2025-10-15:15:26",
+    "src_hash": "4013e3e5c39def6fc0e3d08d28f7158b"
+  },
+  "VSCode Agent/gpt-4o.txt": {
+    "translate_datetime": "2025-10-14:18:09",
+    "src_hash": "c4545ac1f909456cbc6df5bf4822f071"
+  },
+  "VSCode Agent/gpt-5-mini.txt": {
+    "translate_datetime": "2025-10-14:18:09",
+    "src_hash": "17ee4de5609a9b79220f77971a0b9377"
+  },
+  "VSCode Agent/gpt-5.txt": {
+    "translate_datetime": "2025-10-14:18:09",
+    "src_hash": "0092d1b4cc6cf6ec7a7c24db67ccf7be"
+  },
+  "VSCode Agent/nes-tab-completion.txt": {
+    "translate_datetime": "2025-10-14:18:09",
+    "src_hash": "43296e26b04a74c22304f795a85db69b"
+  },
+  "Warp.dev/Prompt.txt": {
+    "translate_datetime": "2025-10-14:18:09",
+    "src_hash": "ad5ce406fd6a19c15e9c390eb8a04cef"
+  },
+  "Windsurf/Prompt Wave 11.txt": {
+    "translate_datetime": "2025-10-14:18:09",
+    "src_hash": "fb8c623cf7a30f0c76604ec91970296f"
+  },
+  "Windsurf/Tools Wave 11.txt": {
+    "translate_datetime": "2025-10-14:18:09",
+    "src_hash": "994af82a02b8d7c3eabd204f4ea5db4b"
+  },
+  "Xcode/DocumentAction.txt": {
+    "translate_datetime": "2025-10-14:18:09",
+    "src_hash": "40e16cd227867d7e7a71206b0040b4f7"
+  },
+  "Xcode/ExplainAction.txt": {
+    "translate_datetime": "2025-10-14:18:09",
+    "src_hash": "0fa7ea05fd1f947e872d46a1c98d5b33"
+  },
+  "Xcode/MessageAction.txt": {
+    "translate_datetime": "2025-10-14:18:09",
+    "src_hash": "94f85a82d78ad37d49f4c2a38e5c8305"
+  },
+  "Xcode/PlaygroundAction.txt": {
+    "translate_datetime": "2025-10-14:18:09",
+    "src_hash": "1cc2e6d4dc05215d7e9bf287df639fa6"
+  },
+  "Xcode/PreviewAction.txt": {
+    "translate_datetime": "2025-10-14:18:09",
+    "src_hash": "4aa325b84b78314f173445f4a1b9edef"
+  },
+  "Xcode/System.txt": {
+    "translate_datetime": "2025-10-14:18:09",
+    "src_hash": "0b405feb6a5490e433c9ae88a56d3f04"
+  },
+  "Z.ai Code/prompt.txt": {
+    "translate_datetime": "2025-10-14:18:09",
+    "src_hash": "edb05e6ce445d0cdf747b3a3322cc0e9"
+  },
+  "VSCode Agent/gpt-4.1.txt": {
+    "translate_datetime": "2025-10-15:15:30",
+    "src_hash": "0418d387c03a497517d9ff6838cb1b51"
+  },
+  "Trae/Builder Prompt.md": {
+    "translate_datetime": "2025-10-15:16:50",
+    "src_hash": "d4db5b4e1c19e3d0c4b9819a13204b8a"
   }
 }

@@ -1,0 +1,57 @@
+用户当前位于此文件中：{{filename}}
+内容如下：
+```swift:{{filename}}
+{{filecontent}}
+```
+
+用户已从该文件中选择以下代码：
+```swift
+{{selected}}
+```
+
+用户已请求：
+
+您的任务是为SwiftUI视图创建一个预览，并且只返回#Preview宏的代码，无需额外解释。
+
+#Preview的初始化器如下：
+
+```
+init(_ name: String? = nil, body: @escaping @MainActor () -> any View)
+```
+
+示例如下：
+```swift
+#Preview {
+      Text(\"Hello World!\")
+}
+```
+
+创建#Preview时请考虑以下几点：
+- 如果视图代码包含任何类似以下的修饰符或类型，请将视图嵌入NavigationStack中，否则不要添加：
+    a) .navigation.*
+    b) NavigationLink
+    c) .toolbar.*
+    d) .customizationBehavior
+    e) .defaultCustomization
+- 如果视图代码包含任何类似以下的修饰符，或具有Row后缀，请将视图嵌入`List`中，否则不要添加：
+    a) .listItemTint
+    b) .listItemPlatterColor
+    c) .listRowBackground
+    d) .listRowInsets
+    e) .listRowPlatterColor
+    f) .listRowSeparatorTint
+    g) .listRowSpacing
+    h) .listSectionSeparatorTint
+    i) .listSectionSpacing
+    j) .selectionDisabled
+- 如果视图代码接受类型列表，请创建一个包含5个条目的列表
+- 如果视图接受`Binding`/`@Binding`，您可以在`#Preview`中定义它。
+- 除非必需，否则不要添加@availability。仅在使用以下内容时添加：
+    a) `@Previewable`
+- 如果存在视图所需类型的静态变量，请优先使用它们而不是自己实例化该类型。
+- 如果任何参数类型是Image、CGImage、NSImage、UIImage，首先尝试使用全局变量或静态变量。
+
+需要为其创建#Preview的视图是：
+`{{selected}}`
+
+返回#Preview且无需额外解释。始终将预览包装在三重反引号markdown代码片段标记中。

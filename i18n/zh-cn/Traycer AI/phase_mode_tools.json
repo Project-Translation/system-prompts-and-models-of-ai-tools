@@ -1,0 +1,338 @@
+
+{
+  "read_file": {
+    "description": "读取指定路径文件的内容。当您需要检查任何现有文件的内容时使用此工具，例如分析代码、查看文本文件或从配置文件中提取信息。对于大文件，系统将提供结构化摘要，包含行范围和各部分的简要描述，而不是完整内容。然后您可以使用read_partial_file工具在查看摘要后请求特定的行范围。自动从PDF和DOCX文件中提取原始文本。可能不适用于其他类型的二进制文件，因为它会将原始内容作为字符串返回。最好推测性地将多个可能有用的文件作为一批读取。",
+    "parameters": {
+      "paths": {
+        "description": "要读取的文件路径。使用绝对路径。",
+        "items": {
+          "properties": {
+            "includeDiagnostics": {
+              "default": false,
+              "description": "是否通过使用内置LSP分析其代码来收集诊断信息，包括错误、警告和代码检查建议。仅当您需要识别和解决特定问题时才返回true。",
+              "type": "boolean"
+            },
+            "path": {
+              "sanitizePath": true,
+              "type": "string"
+            }
+          },
+          "required": ["path", "includeDiagnostics"],
+          "type": "object"
+        },
+        "type": "array"
+      }
+    }
+  },
+
+  "read_partial_file": {
+    "description": "从指定路径的文件中读取特定的行范围。当您只需要检查文件的部分内容而不是整个内容时使用此工具，这对于您只需要关注代码、配置文件或文本文档的特定部分时很有用。为每个路径指定startLine和numberOfLines属性来精确控制您想要读取的文件部分。当您只需要特定部分时，这比读取整个文件更高效。",
+    "parameters": {
+      "paths": {
+        "description": "要读取的文件路径。每个项目是一个包含path和可选的startLine和endLine属性的对象，用于指定行范围。",
+        "items": {
+          "properties": {
+            "includeDiagnostics": {
+              "default": false,
+              "description": "是否通过使用内置LSP分析其代码来收集诊断信息，包括错误、警告和代码检查建议。仅当您需要识别和解决特定问题时才返回true。",
+              "type": "boolean"
+            },
+            "numberOfLines": {
+              "description": "从起始行开始读取的行数。允许的值为300、500、700或900",
+              "type": "number"
+            },
+            "path": {
+              "description": "要读取的文件路径。使用绝对路径。",
+              "sanitizePath": true,
+              "type": "string"
+            },
+            "startLine": {
+              "description": "开始读取的起始行号（从1开始索引）。可选 - 如果省略，则从第1行开始。",
+              "type": "number"
+            }
+          },
+          "required": ["path", "numberOfLines", "startLine", "includeDiagnostics"],
+          "type": "object"
+        },
+        "type": "array"
+      }
+    }
+  },
+
+  "list_dir": {
+    "description": "列出目录的内容。这是用于发现的快速工具，在使用更有针对性的工具如代码库搜索或文件读取之前使用。有助于在深入特定文件之前尝试理解文件结构。可用于探索代码库。",
+    "parameters": {
+      "path": {
+        "description": "要列出内容的目录路径。使用绝对路径。",
+        "sanitizePath": true,
+        "type": "string"
+      },
+      "recursive": {
+        "description": "是否递归列出文件。递归列出使用'true'，仅列出顶级使用'false'或省略。",
+        "type": "boolean"
+      }
+    }
+  },
+
+  "file_search": {
+    "description": "基于文件路径的模糊匹配进行快速文件搜索。如果您知道文件路径的一部分但不知道确切位置，请使用此工具。响应将限制为10个结果。如果需要进一步过滤结果，请使您的查询更具体。最好推测性地将多个可能有用的搜索作为一批执行。",
+    "parameters": {
+      "pattern": {
+        "description": "要搜索的模糊文件名",
+        "type": "string"
+      }
+    }
+  },
+
+  "grep_search": {
+    "description": "快速的基于文本的正则表达式搜索，在文件或目录中查找精确的模式匹配，利用ripgrep命令进行高效搜索。结果将按照ripgrep的样式格式化，可以配置为包含行号和内容。为避免输出过多，结果限制为50个匹配。使用include模式按文件类型或特定路径过滤搜索范围。这对于查找精确的文本匹配或正则表达式模式最有用。对于查找特定字符串或模式，比代码库搜索更精确。当我们在某些目录/文件类型中知道要搜索的确切符号/函数名/等时，这比代码库搜索更受青睐。",
+    "parameters": {
+      "includePattern": {
+        "anyOf": [
+          {
+            "description": "要包含的文件的Glob模式（例如，'*.ts'表示TypeScript文件）。如果未提供，将搜索所有文件（*）。",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "regex": {
+        "description": "要搜索的正则表达式模式。",
+        "type": "string"
+      }
+    }
+  },
+
+  "web_search": {
+    "description": "执行网络搜索以查找给定查询的相关信息和文档。此工具有助于收集解决任务有用的外部知识，特别是用于获取最新信息或文档。",
+    "parameters": {
+      "query": {
+        "description": "要在网上查找的搜索查询。",
+        "type": "string"
+      }
+    }
+  },
+
+  "get_diagnostics": {
+    "description": "通过使用内置LSP分析其代码，为匹配glob模式的多个文件检索诊断信息，包括错误、警告和代码检查建议。使用此功能来识别和解决匹配特定模式的多个文件中的特定问题。",
+    "parameters": {
+      "directories": {
+        "description": "从中检索诊断的目录。使用绝对路径。如果要搜索工作区中的所有文件，请提供打开的工作区目录。",
+        "items": {
+          "description": "要搜索文件的目录。使用绝对路径。",
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "includePattern": {
+        "anyOf": [
+          {
+            "description": "要包含的文件的Glob模式（例如，'*.ts'表示TypeScript文件）。如果未提供，将搜索所有文件（*）。",
+            "type": "string"
+          },
+          {
+            "description": "如果未提供，返回所有严重级别。",
+            "type": "null"
+          }
+        ]
+      },
+      "severity": {
+        "anyOf": [
+          {
+            "description": "要检索的诊断的严重级别。",
+            "enum": ["Error", "Warning", "Information", "Hint"],
+            "type": "string"
+          },
+          {
+            "description": "如果未提供，返回所有严重级别。",
+            "type": "null"
+          }
+        ]
+      }
+    }
+  },
+
+  "file_outlines": {
+    "description": "获取指定目录顶级所有文件的符号大纲。当您需要从高级别理解多个文件中存在的代码时，这特别有用。",
+    "parameters": {
+      "path": {
+        "description": "要获取文件大纲的目录路径。使用绝对路径。",
+        "sanitizePath": true,
+        "type": "string"
+      }
+    }
+  },
+
+  "find_references": {
+    "description": "查找函数、方法、类、接口等的引用（使用、提及等）。使用此工具跳转到代码库中使用给定符号的所有位置。软件开发人员广泛使用此功能来精确探索大型代码库。当您需要查找符号的引用时（LSP跟踪的任何内容），优先选择此工具而不是codebase_search。您需要提供提及符号的文件和行号。查找引用工具将自动带您到相关位置。这适用于项目内部或外部的位置。",
+    "parameters": {
+      "line": {
+        "anyOf": [
+          {
+            "description": "提及符号的行号。此字段是可选的。如果省略，它将匹配文件中此符号的第一次出现。",
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "path": {
+        "anyOf": [
+          {
+            "description": "提及符号的文件路径。如果省略，它将匹配聊天中最后一个包含此符号的文件。使用绝对路径。",
+            "sanitizePath": true,
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "symbol": {
+        "description": "您要为其查找引用的符号名称。",
+        "type": "string"
+      }
+    }
+  },
+
+  "go_to_definition": {
+    "description": "转到函数、方法、类、接口等的定义。使用此工具跳转到符号的定义。软件开发人员广泛使用此功能来精确探索大型代码库。当您需要查找符号的定义时（LSP跟踪的任何内容），优先选择此工具而不是codebase_search。您可以提供提及符号的文件和行号。此工具也可以仅对符号本身工作，尽管提供文件和符号将给出更精确的结果。转到定义工具将自动带您到相关位置。这适用于项目内部或外部的位置。",
+    "parameters": {
+      "line": {
+        "anyOf": [
+          {
+            "description": "提及符号的行号。此字段是可选的。如果省略，它将匹配文件中此符号的第一次出现。",
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "path": {
+        "anyOf": [
+          {
+            "description": "提及符号的文件路径。如果省略，它将匹配聊天中最后一个包含此符号的文件。使用绝对路径。",
+            "sanitizePath": true,
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "symbol": {
+        "description": "您要为其查找定义的符号名称。",
+        "type": "string"
+      }
+    }
+  },
+
+  "go_to_implementations": {
+    "description": "使用内置LSP对给定的抽象类或函数符号进行\"转到实现\"。",
+    "parameters": {
+      "line": {
+        "anyOf": [
+          {
+            "description": "提及符号的行号。此字段是可选的。如果省略，它将匹配文件中此符号的第一次出现。",
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "path": {
+        "anyOf": [
+          {
+            "description": "提及符号的文件路径。如果省略，它将匹配聊天中最后一个包含此符号的文件。使用绝对路径。",
+            "sanitizePath": true,
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "symbol": {
+        "description": "您要为其查找实现的符号名称。",
+        "type": "string"
+      }
+    }
+  },
+
+  "explanation_response": {
+    "description": "- 您勤奋而彻底！您在解释中绝不会留下任何模糊的部分。\n- 提供清晰、简洁、易于理解的解释。\n- 使用markdown格式以提高可读性。",
+    "parameters": {
+      "canProposePhases": {
+        "description": "仅当解释包含可以分解为可操作阶段的实现策略时才设置为true。\n\n例如：\n**设置为TRUE时：**\n* 您提供带有实现步骤的完整解决方案架构（例如，JSON序列化重新设计）。\n* 您解释\"如何实现功能X\"并附带具体技术步骤。\n* 您提出带有明确指导的重构。\n* 您概述带有实现细节的架构更改。\n* 当您呈现问题的分析以及解决方案时。\n\n**保持FALSE时：**\n• 纯概念性内容（\"什么是依赖注入？\"）。\n• 您只是诊断问题而不给出修复（\"这就是您的代码慢的原因\"）。\n• 比较分析（React vs Vue 优缺点）。\n• 您只是解释错误发生的原因而不规定更改。",
+        "type": "boolean"
+      },
+      "explanation": {
+        "description": "提供对主题或概念的清晰全面的解释。优化可读性并使用markdown格式。",
+        "type": "string"
+      },
+      "mermaid": {
+        "description": "生成Mermaid图表以可视化概念或流程。图表应该简单易懂，专注于关键方面。\n\n您可以使用以下mermaid图表类型之一：\n- sequenceDiagram（首选方法）\n- graph TD\n- flowchart TD\n- classDiagram\n- stateDiagram\n\n在哪里使用哪种图表类型：\n1. 大多数场景最好表示为sequenceDiagram。您应该始终优先选择它而不是其他图表类型。\n2. 某些场景可以表示为graph TD，例如显示组件之间的关系。\n3. 使用flowchart TD表示复杂流程（条件、循环等）。\n4. 使用classDiagram表示类层次结构。\n5. 使用stateDiagram表示状态机。\n\n当图表没有意义时，不要生成任何mermaid图表，例如，当概念太简单或图表不会增加价值时。",
+        "type": "string"
+      }
+    }
+  },
+
+  "ask_user_for_clarification": {
+    "description": "使用此工具向用户询问关于关键设计决策的澄清或输入。",
+    "parameters": {
+      "questions": {
+        "description": "保持您的问题简短扼要。如果适用，提供选项。使用markdown格式。",
+        "type": "string"
+      }
+    }
+  },
+}
+
+  "write_phases": {
+    "description": "使用此工具将任何大型编码任务——重构或新功能——分解为*独立可执行阶段*，这些阶段**始终保持代码库编译通过且所有测试通过**。专注于代码级工作；跳过属于基础设施配置、部署、监控或其他非开发关注的阶段。\n\n### 阶段规模指导原则\n\n* 将每个阶段视为一个范围明确的拉取请求：一个评审者可以一目了然的连贯工作块。\n* 如果单个文件重构（或类似的小改动）就能完成任务，就保持为一个阶段——不要强制增加额外步骤。\n* 相反，当一个改动变得过大或混合了无关关注点时，要拆分阶段。\n\n### 核心原则\n\n1. **影子化，不要覆盖**\n  * 引入并行符号（例如`Thing2`）而不是修改遗留实现。\n  * 保持原始路径有效和功能正常，直到最终的"切换"阶段。\n\n2. **逐阶段完整性**\n  * 每个阶段都必须编译、运行现有测试，并在必要时添加新测试。\n  * 当存在死代码、损坏的接口或失败的检查时，不要继续前进。\n  * 例如，如果API的返回类型发生变化，请在同一阶段更新其所有消费者。\n\n3. **利用遗留参考**\n  * 持续将新代码与旧实现进行比较。\n  * 可以在关键节点添加明确的阶段或在阶段中添加指令来执行此操作。\n\n4. **最终阶段**\n  * 此阶段需要验证所需行为是否完全重现。\n  * 一旦新代码得到验证，重命名或交换入口点，移除`Thing`与`Thing2`的重复，并删除过时路径。\n\n注意：在制定阶段分解之前，退后一步确保您遵循了核心原则和指导方针。",
+    "parameters": {
+      "howDidIGetHere": {
+        "description": "将此部分控制在150字以内，并使用markdown格式。记录塑造阶段计划的调查步骤和发现。不要提及具体的工具名称，而是将其作为动词提及。例如，list_files工具调用可以描述为'我列出了文件'。",
+        "type": "string"
+      },
+      "phases": {
+        "description": "一种逐阶段实施给定任务的方法。",
+        "items": {
+          "properties": {
+            "id": {
+              "description": "阶段的唯一标识符。",
+              "type": "string"
+            },
+            "promptForAgent": {
+              "description": "一个简洁明了的提示，AI代理可以使用它来实现此阶段。请提及代码库中的任何相关组件、模块或文件夹，并确保用反引号括起来。使用markdown格式。提示应为3-4个要点且不超过60字。",
+              "type": "string"
+            },
+            "referredFiles": {
+              "items": {
+                "description": "代理应参考以实现此阶段的绝对文件路径。",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "title": {
+              "description": "阶段的标题。",
+              "type": "string"
+            }
+          },
+          "required": ["id", "title", "promptForAgent", "referredFiles"],
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "reasoning": {
+        "description": "解释为什么您要这样分解阶段。您是否遵循了阶段分解的指导方针和核心原则？",
+        "type": "string"
+      }
+    }
+  }
+}

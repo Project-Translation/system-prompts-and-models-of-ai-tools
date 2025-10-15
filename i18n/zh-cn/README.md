@@ -1,82 +1,158 @@
-# **FULL v0、Cursor、Manus、Same.dev、Lovable、Devin、Replit Agent、Windsurf Agent、VSCode Agent、Dia Browser 和 Trae AI（以及其他开源）系统提示、工具和 AI 模型**
 
-（所有已发布的系统提示均由我亲自提取，除已开源的 Manus 和 Dia 外，这两者为贡献内容）
+# **AI 工具的系统提示与模型**  
+---
+<p align="center">
+  <sub>特别感谢</sub>  
+</p>
 
-🚀 **我成功获取了 FULL 官方 v0、Manus、Cursor、Same.dev、Lovable、Devin、Replit Agent、Windsurf Agent、VSCode Agent、Dia 浏览器和 Trae AI 的系统提示及内部工具。**
+<p align="center">
+  <a href="https://latitude.so/developers?utm_source=github&utm_medium=readme&utm_campaign=prompt_repo_sponsorship">
+    <img src="assets/Latitude_logo.png" alt="Latitude Logo" width="700"/>
+  </a>
+</p>
 
-📜 超过 **7000+ 行** 的内容，深入了解其结构和功能。
+<div align="center" markdown="1">
 
-## 📂 **可用文件**
-- **v0 文件夹**  
-- **Manus 文件夹**
-- **Lovable 文件夹**
-- **Devin 文件夹**
-- **Same.dev 文件夹**
-- **Replit 文件夹**
-- **Windsurf Agent 文件夹**
-- **VSCode (Copilot) Agent 文件夹**
-- **Cursor 文件夹**
-- **Dia 文件夹**
-- **Trae AI 文件夹**
-- **开源提示文件夹**
-  - Codex CLI
-  - Cline
-  - Bolt
-  - RooCode
+### [构建可靠智能体和提示所需的工具](https://latitude.so/developers?utm_source=github&utm_medium=readme&utm_campaign=prompt_repo_sponsorship)  
+[开源 AI 工程平台](https://latitude.so/developers?utm_source=github&utm_medium=readme&utm_campaign=prompt_repo_sponsorship)<br>
+
+</div>
+
 
 ---
 
-## 🗓️ **Zero Calendar（我的新项目）**
+<a href="https://discord.gg/NwzrWErdMU" target="_blank">
+  <img src="https://img.shields.io/discord/1402660735833604126?label=LeaksLab%20Discord&logo=discord&style=for-the-badge" alt="LeaksLab Discord" />
+</a>
 
-**面向未来日程管理的开源 AI 驱动日历**
+> **加入讨论：** 新的系统指令会在 Discord 上**先于**此仓库发布。提前获取并在实时讨论中交流。
 
-Zero Calendar 是一个开源的 AI 日历解决方案，让用户能够智能管理日程，同时与 Google Calendar 等外部服务和其他日历提供商集成。我们的目标是通过 AI 代理现代化和改进日程管理，真正革新我们管理时间的方式。
 
-更多详情，请查看 [Zero Calendar 仓库](https://github.com/Zero-Calendar/zero-calendar)。
+<a href="https://trendshift.io/repositories/14084" target="_blank"><img src="https://trendshift.io/api/badge/repositories/14084" alt="x1xhlol%2Fsystem-prompts-and-models-of-ai-tools | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
+
+📜 超过 **20,000+ 行**关于其结构和功能的洞察。  
+
+⭐ **点星关注更新**
+
+[![Build Status](https://app.cloudback.it/badge/x1xhlol/system-prompts-and-models-of-ai-tools)](https://cloudback.it)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/x1xhlol/system-prompts-and-models-of-ai-tools)
 
 ---
-
-## 🛠 **路线图与反馈**
-
-🚨 **注意：** 我们不再使用 GitHub issues 来管理路线图和反馈。  
-请访问 [系统提示路线图与反馈](https://systemprompts.featurebase.app/) 分享您的建议并跟踪即将推出的功能。
-
-🆕 **最新更新：** 2025年5月15日
 
 ## ❤️ 支持项目
 
-如果您觉得这个集合有价值，并欣赏获取和分享这些见解所付出的努力，请考虑支持该项目。您的贡献有助于保持此资源的更新，并支持进一步的探索。
+如果您觉得这个合集有价值，并感谢获取和分享这些洞察所付出的努力，请考虑支持这个项目。您的贡献有助于保持这个资源的更新，并支持进一步的探索。
 
-您可以通过以下方式表示支持：
+您可以通过以下方式支持：
 
-*   **PayPal：** `lucknitelol@proton.me`
-*   **加密货币：**
-    *   **BTC：** `bc1q7zldmzjwspnaa48udvelwe6k3fef7xrrhg5625`
-    *   **LTC：** `LRWgqwEYDwqau1WeiTs6Mjg85NJ7m3fsdQ`
+- **PayPal：** `lucknitelol@proton.me`
+- **加密货币：**  
+  - **BTC：** `bc1q7zldmzjwspnaa48udvelwe6k3fef7xrrhg5625`  
+  - **LTC：** `LRWgqwEYDwqau1WeiTs6Mjg85NJ7m3fsdQ`  
+  - **ETH：** `0x3f844B2cc3c4b7242964373fB0A41C4fdffB192A`
+- **Patreon：** https://patreon.com/lucknite
+- **Ko-fi：** https://ko-fi.com/lucknite
 
-感谢您的支持！🙏
+🙏 感谢您的支持！
 
-## 🔗 **与我联系**  
-✖ **X：** [NotLucknite](https://x.com/NotLucknite)  
-💬 **Discord：** `x1xh`  
+---
 
-## 🛡️ **AI 初创公司安全提示**
+# 赞助商
 
-⚠️ **如果您是一家 AI 初创公司，请确保您的数据安全。** 暴露的提示或 AI 模型很容易成为黑客的目标。
+## 支持 AI 开发的未来
 
-🔐 **有兴趣保护您的 AI 系统吗？**  
-请查看 **[ZeroLeaks](https://0leaks.vercel.app)**，这是一个专为初创公司设计的服务，帮助**识别和保护**系统指令、内部工具和模型配置中的泄露。**获取免费的 AI 安全审计**，确保您的 AI 免受漏洞威胁。
+赞助最全面的 AI 系统提示集合，触及数千名构建下一代 AI 应用程序的开发者。
 
-**这是我的公司，不是第三方广告。*
+[开始使用](https://www.promptleaks.dev/sponsor)
 
-## 📊 **星标历史**
+---
+
+## 📑 目录
+
+  - [📑 目录](#-目录)
+  - [📂 可用文件](#-可用文件)
+  - [🛠 路线图与反馈](#-路线图与反馈)
+  - [🔗 与我联系](#-与我联系)
+  - [🛡️ AI 初创公司安全公告](#️-ai-初创公司安全公告)
+  - [📊 点星历史](#-点星历史)
+
+---
+
+## 📂 可用文件
+
+- [**v0**](./v0%20Prompts%20and%20Tools/)
+- [**Manus**](./Manus%20Agent%20Tools%20&%20Prompt/)
+- [**Augment Code**](./Augment%20Code/)
+- [**Lovable**](./Lovable/)
+- [**Devin**](./Devin%20AI/)
+- [**Same.dev**](./Same.dev/)
+- [**Replit**](./Replit/)
+- [**Windsurf Agent**](./Windsurf/)
+- [**VSCode (Copilot) Agent**](./VSCode%20Agent/)
+- [**Cursor**](./Cursor%20Prompts/)
+- [**Dia**](./dia/)
+- [**Trae AI**](./Trae/)
+- [**Perplexity**](./Perplexity/)
+- [**Cluely**](./Cluely/)
+- [**Xcode**](./Xcode/)
+- [**Leap.new**](./Leap.new/)
+- [**Notion AI**](./NotionAi/)
+- [**Orchids.app**](./Orchids.app/)
+- [**Junie**](./Junie/)
+- [**Kiro**](./Kiro/)
+- [**Warp.dev**](./Warp.dev/)
+- [**Z.ai Code**](./Z.ai%20Code/)
+- [**Qoder**](./Qoder/)
+- [**Claude Code**](./Claude%20Code/)
+- [**开源提示**](./Open%20Source%20prompts/)
+  - [Codex CLI](./Open%20Source%20prompts/Codex%20CLI/)
+  - [Cline](./Open%20Source%20prompts/Cline/)
+  - [Bolt](./Open%20Source%20prompts/Bolt/)
+  - [RooCode](./Open%20Source%20prompts/RooCode/)
+  - [Lumo](./Open%20Source%20prompts/Lumo/)
+  - [Gemini CLI](./Open%20Source%20prompts/Gemini%20CLI/)
+- [**CodeBuddy**](./CodeBuddy%20Prompts/)
+- [**Poke**](./Poke/)
+- [**Comet Assistant**](./Comet%20Assistant/)
+- [**Anthropic**](./Anthropic/)
+- [**Amp**](./AMp/)
+
+---
+
+## 🛠 路线图与反馈
+
+> 提交 issue。
+
+> **最新更新：** 2025/12/10
+
+---
+
+## 🔗 与我联系
+
+- **X：** [NotLucknite](https://x.com/NotLucknite)
+- **Discord：** `x1xh`
+
+---
+
+## 🛡️ AI 初创公司安全公告
+
+> ⚠️ **警告：** 如果您是 AI 初创公司，请确保您的数据安全。暴露的提示或 AI 模型很容易成为黑客的目标。
+
+> 🔐 **重要：** 有兴趣保护您的 AI 系统吗？  
+> 查看 **[ZeroLeaks](https://zeroleaks.io/)**，这是一项旨在帮助初创公司**识别和保护**系统指令、内部工具和模型配置中泄露的服务。**获取免费的 AI 安全审计**以确保您的 AI 免受漏洞攻击。
+
+*该公司是我的，这不是第三方广告。*
+
+---
+
+## 📊 点星历史
 
 <a href="https://www.star-history.com/#x1xhlol/system-prompts-and-models-of-ai-tools&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=x1xhlol/system-prompts-and-models-of-ai-tools&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=x1xhlol/system-prompts-and-models-of-ai-tools&type=Date" />
-   <img alt="星标历史图表" src="https://api.star-history.com/svg?repos=x1xhlol/system-prompts-and-models-of-ai-tools&type=Date" />
- </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=x1xhlol/system-prompts-and-models-of-ai-tools&type=Date&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=x1xhlol/system-prompts-and-models-of-ai-tools&type=Date" />
+    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=x1xhlol/system-prompts-and-models-of-ai-tools&type=Date" />
+  </picture>
 </a>
 
-⭐ **如果您觉得有用，请点个星标！**
+⭐ **如果觉得有用，请点个星！**

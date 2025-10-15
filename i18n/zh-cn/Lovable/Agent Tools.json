@@ -1,0 +1,438 @@
+{
+  "lov-add-dependency": {
+    "description": "使用此工具向项目添加依赖项。依赖项应为有效的 npm 包名称。",
+    "parameters": {
+      "properties": {
+        "package": {
+          "example": "lodash@latest",
+          "type": "string"
+        }
+      },
+      "required": ["package"],
+      "type": "object"
+    }
+  },
+  "lov-search-files": {
+    "description": "基于正则表达式的代码搜索，支持文件过滤和上下文。\n\n在项目中使用正则表达式模式搜索文件。\n\n参数：\n- query: 要查找的正则表达式模式（例如 \"useState\"）\n- include_pattern: 使用 glob 语法包含的文件（例如 \"src/**\"）\n- exclude_pattern: 使用 glob 语法排除的文件（例如 \"**/*.test.tsx\"）\n- case_sensitive: 是否区分大小写（默认：false）\n\n提示：使用 \\\\ 来转义正则表达式模式中的特殊字符。",
+    "parameters": {
+      "properties": {
+        "case_sensitive": {
+          "example": "false",
+          "type": "boolean"
+        },
+        "exclude_pattern": {
+          "example": "src/components/ui/**",
+          "type": "string"
+        },
+        "include_pattern": {
+          "example": "src/**",
+          "type": "string"
+        },
+        "query": {
+          "example": "useEffect\\(",
+          "type": "string"
+        }
+      },
+      "required": ["query", "include_pattern"],
+      "type": "object"
+    }
+  },
+  "lov-write": {
+    "description": "\n使用此工具写入文件。如果文件已存在，则覆盖现有文件。文件路径应相对于项目根目录。\n\n  ### 重要：尽量减少代码写入\n  - 对于大多数更改，优先使用 lov-line-replace 而不是重写整个文件\n  - 此工具主要用于创建新文件或在 lov-line-replace 失败时作为备用方案\n  - 当必须写入时，最大化使用 \"// ... keep existing code\" 来保持未修改的部分\n  - 只写入需要更改的特定部分 - 尽可能懒惰地进行写入\n  \n  ### 使用 \"keep existing code\"（对于大型未更改部分是强制性的）：\n  - 任何超过 5 行的未更改代码块必须使用 \"// ... keep existing code\" 注释\n  - 注释必须包含确切的字符串 \"... keep existing code\"\n  - 示例：\"// ... keep existing code (user interface components)\"\n  - 切勿重写不需要更改的大型代码段\n  \n  正确使用 keep existing code 的示例：\n  ```\n  import React from 'react';\n  import './App.css';\n  \n  function App() {\n    // ... keep existing code (all UI components)\n    \n    // Only the new footer is being added\n    const Footer = () => (\n      New Footer Component\n    );\n    \n    return (\n      \n        // ... keep existing code (main content)\n        \n      \n    );\n  }\n  \n  export default App;\n  ```\n\n  ### 并行工具使用\n  - 如果需要创建多个文件，一次性创建所有文件而不是逐个创建非常重要，因为这样会快得多\n",
+    "parameters": {
+      "properties": {
+        "content": {
+          "example": "console.log('Hello, World!')",
+          "type": "string"
+        },
+        "file_path": {
+          "example": "src/main.ts",
+          "type": "string"
+        }
+      },
+      "required": ["file_path", "content"],
+      "type": "object"
+    }
+  },
+  "lov-line-replace": {
+    "description": "基于行的搜索和替换工具\n\n使用此工具在您有权限访问的文件中查找并替换特定内容，使用明确的行号。这是编辑现有文件的首选和主要工具。修改现有代码时，始终使用此工具而不是重写整个文件。\n\n提供以下详细信息以进行编辑：\n\t1.\tfile_path - 要修改的文件路径\n\t2.\tsearch - 要搜索的内容（对于大型部分，使用省略号 ... 而不是完整写出）\n\t3.\tfirst_replaced_line - 搜索中第一行的行号（从 1 开始索引）\n\t4.\tlast_replaced_line - 搜索中最后一行的行号（从 1 开始索引）\n\t5.\treplace - 用于替换找到内容的新内容\n\n该工具将验证搜索是否与指定行范围内的内容匹配，然后用 replace 替换它。\n\n重要：当并行多次调用此工具（对同一文件进行多次编辑）时，始终使用您最初查看文件时的原始行号。不要根据之前的编辑调整行号。\n\n省略号使用方法：\n当替换长度超过约 6 行的代码段时，您应该在搜索中使用省略号 (...) 来减少需要指定的行数（写入更少的行更快）。\n- 包含要替换部分的前几行（通常 2-3 行）\n- 在单独一行添加 \"...\" 表示省略的内容\n- 包含要替换部分的后几行（通常 2-3 行）\n- 关键是在开头和结尾提供足够的唯一上下文以确保准确匹配\n- 专注于唯一性而不是确切的行数 - 有时 2 行就足够了，有时需要 4 行\n\n\n\n示例：\n要替换第 22-42 行的用户卡片组件：\n\n文件中的原始内容（第 20-45 行）：\n20:   return (\n21:     \n22:       \n23:         \n24:         {user.name}\n25:         {user.email}\n26:         {user.role}\n27:         {user.department}\n28:         {user.location}\n29:         \n30:            onEdit(user.id)}>Edit\n31:            onDelete(user.id)}>Delete\n32:            onView(user.id)}>View\n33:         \n34:         \n35:           Created: {user.createdAt}\n36:           Updated: {user.updatedAt}\n37:           Status: {user.status}\n38:         \n39:         \n40:           Permissions: {user.permissions.join(', ')}\n41:         \n42:       \n43:     \n44:   );\n45: }\n\n对于这样的大型替换，您必须使用省略号：\n- search: \"      \\n        \\n...\\n          Permissions: {user.permissions.join(', ')}\\n        \\n      \"\n- first_replaced_line: 22\n- last_replaced_line: 42\n- replace: \"      \\n        \\n           {\\n              e.currentTarget.src = '/default-avatar.png';\\n            }}\\n          />\\n        \\n        \\n          {user.name}\\n          {user.email}\\n          \\n            {user.role}\\n            {user.department}\\n          \\n        \\n        \\n           onEdit(user.id)}\\n            aria-label=\\\"Edit user profile\\\"\\n          >\\n            Edit Profile\\n          \\n        \\n      \"\n\n关键指南：\n\t1. 行号 - 指定确切的 first_replaced_line 和 last_replaced_line（从 1 开始索引，第一行为第 1 行）\n\t2. 省略号使用 - 对于大型部分（>6 行），使用省略号 (...) 仅包含前几个和后几个关键的标识行，以实现更清晰、更集中的匹配\n\t3. 内容验证 - 搜索的前缀和后缀部分（省略号之前和之后）必须包含来自文件的确切内容匹配（不带行号）。该工具将这些部分与实际文件内容进行验证\n\t4. 文件验证 - 文件必须存在且可读\n\t5. 并行工具调用 - 当需要多次编辑时，同时并行调用必要的工具。不要等待一个编辑完成后再开始下一个\n\t6. 原始行号 - 当对同一文件进行多次编辑时，始终使用您初次查看文件时的原始行号",
+    "parameters": {
+      "properties": {
+        "file_path": {
+          "example": "src/components/TaskList.tsx",
+          "type": "string"
+        },
+        "first_replaced_line": {
+          "description": "要替换的第一行行号（从 1 开始索引）",
+          "example": "15",
+          "type": "number"
+        },
+        "last_replaced_line": {
+          "description": "要替换的最后一行行号（从 1 开始索引）",
+          "example": "28",
+          "type": "number"
+        },
+        "replace": {
+          "description": "用于替换搜索内容的新内容（不带行号）",
+          "example": "  const handleTaskComplete = useCallback((taskId: string) => {\n    const updatedTasks = tasks.map(task =>\n      task.id === taskId \n        ? { ...task, completed: !task.completed, completedAt: new Date() }\n        : task\n    );\n    setTasks(updatedTasks);\n    onTaskUpdate?.(updatedTasks);\n    \n    // Analytics tracking\n    analytics.track('task_completed', { taskId, timestamp: Date.now() });\n  }, [tasks, onTaskUpdate]);",
+          "type": "string"
+        },
+        "search": {
+          "description": "要在文件中搜索的内容（不带行号）。这应该与将被替换的现有代码匹配。",
+          "example": "  const handleTaskComplete = (taskId: string) => {\n    setTasks(tasks.map(task =>\n...\n    ));\n    onTaskUpdate?.(updatedTasks);\n  };",
+          "type": "string"
+        }
+      },
+      "required": ["file_path", "search", "first_replaced_line", "last_replaced_line", "replace"],
+      "type": "object"
+    }
+  },
+  "lov-download-to-repo": {
+    "description": "从 URL 下载文件并将其保存到仓库。\n\n此工具适用于：\n- 从 URL 下载图像、资产或其他文件。在 src/assets 文件夹中下载图像，并将其作为 ES6 模块导入。\n- 将外部资源直接保存到项目\n- 将文件从外部源迁移到仓库\n\n文件将被下载并保存在仓库中的指定路径，准备好在项目中使用。\n重要：不要使用此工具处理聊天中用户上传的图像，并遵循图像给出的说明！\n\n",
+    "parameters": {
+      "properties": {
+        "source_url": {
+          "description": "要下载文件的 URL",
+          "example": "https://example.com/image.png",
+          "type": "string"
+        },
+        "target_path": {
+          "description": "文件应在仓库中保存的路径（除非另有说明，否则使用 public 文件夹）",
+          "example": "public/images/logo.png",
+          "type": "string"
+        }
+      },
+      "required": ["source_url", "target_path"],
+      "type": "object"
+    }
+  },
+  "lov-fetch-website": {
+    "description": "获取网站并将其内容（markdown、HTML、截图）临时保存到 `tmp://fetched-websites/` 中的文件。返回创建文件的路径和内容预览。",
+    "parameters": {
+      "properties": {
+        "formats": {
+          "description": "要返回的格式的逗号分隔列表。支持的格式：'markdown'、'html'、'screenshot'。默认为 'markdown'。",
+          "example": "markdown,screenshot",
+          "type": "string"
+        },
+        "url": {
+          "example": "https://example.com",
+          "type": "string"
+        }
+      },
+      "required": ["url"],
+      "type": "object"
+    }
+  },
+  "lov-copy": {
+    "description": "使用此工具将文件或目录复制到新位置。此工具主要用于将文件从虚拟文件系统（例如 `user-uploads://`）复制到项目仓库。",
+    "parameters": {
+      "properties": {
+        "destination_file_path": {
+          "example": "src/main_copy.ts",
+          "type": "string"
+        },
+        "source_file_path": {
+          "example": "src/main.ts",
+          "type": "string"
+        }
+      },
+      "required": ["source_file_path", "destination_file_path"],
+      "type": "object"
+    }
+  },
+  "lov-view": {
+    "description": "使用此工具读取文件内容。如果是项目文件，文件路径应相对于项目根目录。您可以选择使用 lines 参数指定要读取的行范围（例如 \"1-800, 1001-1500\"）。如果未指定 lines，默认读取前 500 行。\n\n重要指南：\n- 如果文件内容已在 中提供，请不要使用此工具\n- 除非文件非常大（>500 行），否则不要指定行范围 - 依赖显示前 500 行的默认行为\n- 只有当您需要查看大型文件中默认视图未显示的特定部分时，才使用行范围\n- 如果需要读取多个文件，为提高效率，请多次并行调用此工具（而不是顺序调用）",
+    "parameters": {
+      "properties": {
+        "file_path": {
+          "example": "src/App.tsx",
+          "type": "string"
+        },
+        "lines": {
+          "example": "1-800, 1001-1500",
+          "type": "string"
+        }
+      },
+      "required": ["file_path"],
+      "type": "object"
+    }
+  },
+  "lov-read-console-logs": {
+    "description": "使用此工具读取用户发送请求时刻的最新控制台日志内容。\n您可以选择提供搜索查询来过滤日志。如果为空，您将获得所有最新日志。\n您可能无法查看最近没有发生的日志。\n在构建和编写代码时，日志不会更新。因此，不要期望通过再次读取日志来验证是否修复了问题。它们将与您开始编写代码时相同。\n不要多次使用此工具，因为每次您都会获得相同的日志。",
+    "parameters": {
+      "properties": {
+        "search": {
+          "example": "error",
+          "type": "string"
+        }
+      },
+      "required": ["search"],
+      "type": "object"
+    }
+  },
+  "lov-read-network-requests": {
+    "description": "使用此工具读取最新网络请求的内容。您可以选择提供搜索查询来过滤请求。如果为空，您将获得所有最新请求。您可能无法查看最近没有发生的请求。",
+    "parameters": {
+      "properties": {
+        "search": {
+          "example": "error",
+          "type": "string"
+        }
+      },
+      "required": ["search"],
+      "type": "object"
+    }
+  },
+  "lov-remove-dependency": {
+    "description": "使用此工具从项目中卸载包。",
+    "parameters": {
+      "properties": {
+        "package": {
+          "example": "lodash",
+          "type": "string"
+        }
+      },
+      "required": ["package"],
+      "type": "object"
+    }
+  },
+  "lov-rename": {
+    "description": "您必须使用此工具重命名文件，而不是创建新文件并删除旧文件。原始文件路径和新文件路径应相对于项目根目录。",
+    "parameters": {
+      "properties": {
+        "new_file_path": {
+          "example": "src/main_new2.ts",
+          "type": "string"
+        },
+        "original_file_path": {
+          "example": "src/main.ts",
+
+```json
+          "type": "string"
+        }
+      },
+      "required": ["original_file_path", "new_file_path"],
+      "type": "object"
+    }
+  },
+  "lov-delete": {
+    "description": "使用此工具删除文件。文件路径应相对于项目根目录。",
+    "parameters": {
+      "properties": {
+        "file_path": {
+          "example": "src/App.tsx",
+          "type": "string"
+        }
+      },
+      "required": ["file_path"],
+      "type": "object"
+    }
+  },
+  "secrets--add_secret": {
+    "description": "添加新密钥，如API密钥或令牌。如果任何集成需要此密钥或用户希望您使用密钥，您可以使用此工具添加它。此工具确保密钥被正确加密和存储。切勿要求用户直接提供密钥值，而是调用此工具获取密钥。您添加的任何密钥将在您编写的所有后端代码中作为环境变量可用。重要：这是从用户收集密钥的唯一方式，不要以任何其他方式添加。",
+    "parameters": {
+      "properties": {
+        "secret_name": {
+          "example": "STRIPE_API_KEY",
+          "type": "string"
+        }
+      },
+      "required": ["secret_name"],
+      "type": "object"
+    }
+  },
+  "secrets--update_secret": {
+    "description": "更新现有密钥，如API密钥或令牌。如果任何集成需要此密钥或用户希望您使用密钥，您可以使用此工具更新它。此工具确保密钥被正确加密和存储。",
+    "parameters": {
+      "properties": {
+        "secret_name": {
+          "example": "STRIPE_API_KEY",
+          "type": "string"
+        }
+      },
+      "required": ["secret_name"],
+      "type": "object"
+    }
+  },
+  "supabase--docs-search": {
+    "description": "通过内容API搜索官方Supabase文档。返回包含标题、slug、URL和内容片段的排名结果。\n\n何时使用：\n- 查找有关身份验证、数据库、存储或边缘函数的文档\n- 搜索代码示例或实施指南\n\n搜索提示：\n- 使用特定术语，如"行级安全"、"身份验证策略"、"存储桶"\n- 如果初始搜索没有产生结果，尝试不同的关键词组合\n\n下一步：\n- 使用返回的slug通过'docs-get'工具获取完整的结构化内容\n\n示例：\n- "RLS策略" - 返回行级安全文档\n- "存储文件上传" - 显示文件存储实施文档",
+    "parameters": {
+      "properties": {
+        "max_results": {
+          "description": "最大结果数（默认5，最多10）",
+          "type": "number"
+        },
+        "query": {
+          "description": "在Supabase文档中搜索的查询",
+          "type": "string"
+        }
+      },
+      "required": ["query"],
+      "type": "object"
+    }
+  },
+  "supabase--docs-get": {
+    "description": "通过内容API按slug获取完整的Supabase文档页面。返回结构化内容，包括完整的markdown、标题大纲和元数据。\n\n何时使用：\n- 通过'docs-search'找到相关文档后\n- 当您有特定的文档slug/路径时\n- 需要完整的实施细节和代码示例\n\n输入格式：\n- 使用搜索结果中的slug（例如，"auth/row-level-security"）\n- 格式："类别/子类别/页面名称"\n\n输出包括：\n- 包含代码片段的完整markdown内容\n- 结构化标题大纲\n\n示例：\n- "auth/row-level-security" - 完整的RLS实施指南\n- "storage/uploads" - 全面的文件上传实施",
+    "parameters": {
+      "properties": {
+        "slug": {
+          "description": "要获取的规范文档slug（例如 auth/row-level-security）",
+          "type": "string"
+        }
+      },
+      "required": ["slug"],
+      "type": "object"
+    }
+  },
+  "document--parse_document": {
+    "description": "解析并提取文档内容（前50页）。处理PDF、Word文档、PowerPoint、Excel、MP3和许多其他格式。保留文档结构、表格，提取图像，并对嵌入图像执行OCR。",
+    "parameters": {
+      "properties": {
+        "file_path": {
+          "description": "要解析的文档文件的路径",
+          "type": "string"
+        }
+      },
+      "required": ["file_path"],
+      "type": "object"
+    }
+  },
+  "imagegen--generate_image": {
+    "description": "基于文本提示生成图像并将其保存到指定的文件路径。对于非常重要的大图像，请使用最佳模型。在选择尺寸时，请确保考虑图像在页面上的位置的宽高比。\n\n对于小图像（小于1000px），使用flux.schnell，它更快且非常好！这应该是您的默认模型。\n当您生成像全屏图像这样的大图像时，使用flux.dev。最大分辨率为1920x1920。\n生成后，您必须以ES6导入的形式在代码中导入图像。\n\n提示技巧：\n- 在提示中提及宽高比将帮助模型生成正确尺寸的图像。例如："一张16:9宽高比的平静海洋上日落的图像。"\n- 在提示中使用"超高分辨率"后缀以最大化图像质量。\n- 例如，如果您正在生成英雄图像，请在提示中提及。示例："一张平静海洋上日落的英雄图像。"\n\n示例：\nimport heroImage from "@/assets/hero-image.jpg";\n\n重要：\n- 尺寸必须在512和1920像素之间，并且是32的倍数。\n- 确保不要用生成的图像替换用户上传的图像，除非他们明确要求。",
+    "parameters": {
+      "properties": {
+        "height": {
+          "description": "图像高度（最小512，最大1920）",
+          "type": "number"
+        },
+        "model": {
+          "description": "用于生成的模型。选项：flux.schnell（默认）、flux.dev。flux.dev生成更高质量的图像但速度较慢。除非您正在生成像英雄图像或全屏横幅这样的大图像，或者用户要求高质量，否则始终使用flux.schnell。",
+          "type": "string"
+        },
+        "prompt": {
+          "description": "所需图像的文本描述",
+          "type": "string"
+        },
+        "target_path": {
+          "description": "生成图像应保存的文件路径。最好将它们放在'src/assets'文件夹中。",
+          "type": "string"
+        },
+        "width": {
+          "description": "图像宽度（最小512，最大1920）",
+          "type": "number"
+        }
+      },
+      "required": ["prompt", "target_path"],
+      "type": "object"
+    }
+  },
+  "imagegen--edit_image": {
+    "description": "基于文本提示编辑或合并现有图像。\n\n此工具可以处理单个或多个图像：\n- 单个图像：根据您的提示应用AI驱动的编辑\n- 多个图像：根据您的提示合并/组合图像\n\n单个图像的示例提示：\n- "让它下雨"\n- "改为日落光照"\n- "添加雪"\n- "让它更丰富多彩"\n\n多个图像的示例提示：\n- "无缝融合这两个风景"\n- "将第一张图像的前景与第二张图像的背景结合"\n- "将这些肖像合并成团体照片"\n- "从这些图像创建拼贴画"\n\n\n此工具非常适合对象或角色一致性。例如，您可以重用同一图像并将其放置在不同的场景中。如果用户要求调整现有图像，请使用此工具而不是生成新图像。",
+    "parameters": {
+      "properties": {
+        "image_paths": {
+          "description": "现有图像文件的路径数组。对于单个图像编辑，提供一个路径。对于合并/组合多个图像，提供多个路径。",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "prompt": {
+          "description": "如何编辑/合并图像的文本描述。对于多个图像，描述它们应该如何组合。",
+          "type": "string"
+        },
+        "target_path": {
+          "description": "编辑/合并图像应保存的文件路径。",
+          "type": "string"
+        }
+      },
+      "required": ["image_paths", "prompt", "target_path"],
+      "type": "object"
+    }
+  },
+  "websearch--web_search": {
+    "description": "执行网络搜索并返回带有文本内容的相关结果。\n使用此工具查找当前信息、文档或任何基于Web的内容。\n您可以选择要求返回链接或图像链接。\n您还可以选择指定要返回的搜索结果类别。\n有效类别是（您必须使用确切的字符串）：\n- "news"\n- "linkedin profile"\n- "pdf"\n- "github"\n- "personal site"\n- "financial report"\n\n没有其他类别。如果您不指定类别，搜索将是通用的。\n\n何时使用？\n- 当您对用户询问的内容没有任何信息时。\n- 当您需要查找当前信息、文档或任何基于Web的内容时。\n- 当您需要查找特定技术信息等时。\n- 当您需要查找有关特定人员、公司或组织的信息时。\n- 当您需要查找有关特定事件、产品或服务的信息时。\n- 当您需要查找有关特定人员、公司或组织的真实（非AI生成）图像时。\n\n** 搜索指南 **\n\n您可以使用"site:domain.com"在查询中过滤结果到特定域。\n您可以指定多个域："site:docs.anthropic.com site:github.com API documentation"将在两个域上搜索。\n您可以通过将确切短语放在双引号中来搜索它们：'"gpt5" model name OAI'将在搜索中包含"gpt5"。\n您可以通过在词前添加减号来排除特定词：jaguar speed -car将从搜索中排除"car"。\n对于技术信息，以下来源特别有用：stackoverflow、github、产品、框架或服务的官方文档。\n在您的回复中考虑"当前日期"。例如，如果您的指令说"当前日期：2025-07-01"，而用户想要最新的文档，\n不要在搜索查询中使用2024。使用2025！\n",
+    "parameters": {
+      "properties": {
+        "category": {
+          "description": "要返回的搜索结果类别",
+          "type": "string"
+        },
+        "imageLinks": {
+          "description": "为每个结果返回的图像链接数",
+          "type": "number"
+        },
+        "links": {
+          "description": "为每个结果返回的链接数",
+          "type": "number"
+        },
+        "numResults": {
+          "description": "要返回的搜索结果数（默认：5）",
+          "type": "number"
+        },
+        "query": {
+          "description": "搜索查询",
+          "type": "string"
+        }
+      },
+      "required": ["query"],
+      "type": "object"
+    }
+  },
+  "analytics--read_project_analytics": {
+    "description": "读取项目生产版本在两个日期之间的分析数据，具有给定的粒度。粒度可以是'hourly'或'daily'。开始和结束日期必须采用YYYY-MM-DD格式。\n开始和结束日期应采用RFC3339格式或仅日期格式（YYYY-MM-DD）。\n\n何时使用此工具：\n- 当用户询问他们的应用程序使用情况时\n- 当用户想要改进他们的生产应用程序时",
+    "parameters": {
+      "properties": {
+        "enddate": {
+          "type": "string"
+        },
+        "granularity": {
+          "type": "string"
+        },
+        "startdate": {
+          "type": "string"
+        }
+      },
+      "required": ["startdate", "enddate", "granularity"],
+      "type": "object"
+    }
+  },
+  "stripe--enable_stripe": {
+    "description": "在当前项目上启用Stripe集成。调用此工具将提示用户输入他们的Stripe密钥。",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    }
+  },
+  "security--run_security_scan": {
+    "description": "对Supabase后端执行全面的安全分析，以检测暴露的数据、缺失的RLS策略和安全配置错误",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    }
+  },
+  "security--get_security_scan_results": {
+    "description": "获取用户有权访问的项目的安全信息。设置force=true即使扫描正在运行也能获取结果。",
+    "parameters": {
+      "properties": {
+        "force": {
+          "type": "boolean"
+        }
+      },
+      "required": ["force"],
+      "type": "object"
+    }
+  },
+  "security--get_table_schema": {
+    "description": "获取项目Supabase数据库的数据库表架构信息和安全分析提示",
+    "parameters": {
+      "properties": {},
+      "required": [],
+      "type": "object"
+    }
+  }
+}
+```
